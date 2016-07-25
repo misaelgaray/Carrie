@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarreerDataBaseModelStoreContainer" CdmEntityContainer="CarreerDataBaseEntities">
+    <EntitySetMapping Name="areas_car">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.areas_car">
+        <MappingFragment StoreEntitySet="areas_car">
+          <ScalarProperty Name="id_area" ColumnName="id_area" />
+          <ScalarProperty Name="nombre_area" ColumnName="nombre_area" />
+          <ScalarProperty Name="descripcion_area" ColumnName="descripcion_area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carreras">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.Carreras">
+        <MappingFragment StoreEntitySet="Carreras">
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+          <ScalarProperty Name="fk_area" ColumnName="fk_area" />
+          <ScalarProperty Name="nombre_carrera" ColumnName="nombre_carrera" />
+          <ScalarProperty Name="descripcion_carrera" ColumnName="descripcion_carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pregunta_area">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.pregunta_area">
+        <MappingFragment StoreEntitySet="pregunta_area">
+          <ScalarProperty Name="id_pregunta_area" ColumnName="id_pregunta_area" />
+          <ScalarProperty Name="fk_pregunta" ColumnName="fk_pregunta" />
+          <ScalarProperty Name="fk_area" ColumnName="fk_area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Preguntas">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.Preguntas">
+        <MappingFragment StoreEntitySet="Preguntas">
+          <ScalarProperty Name="id_pregunta" ColumnName="id_pregunta" />
+          <ScalarProperty Name="pregunta" ColumnName="pregunta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="preguntas_en_ad">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.preguntas_en_ad">
+        <MappingFragment StoreEntitySet="preguntas_en_ad">
+          <ScalarProperty Name="id_respuesta" ColumnName="id_respuesta" />
+          <ScalarProperty Name="fk_pregunta" ColumnName="fk_pregunta" />
+          <ScalarProperty Name="fk_usuario" ColumnName="fk_usuario" />
+          <ScalarProperty Name="respuesta" ColumnName="respuesta" />
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="preguntas_en_at">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.preguntas_en_at">
+        <MappingFragment StoreEntitySet="preguntas_en_at">
+          <ScalarProperty Name="id_respuesta" ColumnName="id_respuesta" />
+          <ScalarProperty Name="fk_pregunta" ColumnName="fk_pregunta" />
+          <ScalarProperty Name="fk_usuario" ColumnName="fk_usuario" />
+          <ScalarProperty Name="respuesta" ColumnName="respuesta" />
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="resultado_en_ad">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.resultado_en_ad">
+        <MappingFragment StoreEntitySet="resultado_en_ad">
+          <ScalarProperty Name="id_resultado" ColumnName="id_resultado" />
+          <ScalarProperty Name="fk_area_pregunta" ColumnName="fk_area_pregunta" />
+          <ScalarProperty Name="cantidad_si" ColumnName="cantidad_si" />
+          <ScalarProperty Name="cantidad_no" ColumnName="cantidad_no" />
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="resultado_en_at">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.resultado_en_at">
+        <MappingFragment StoreEntitySet="resultado_en_at">
+          <ScalarProperty Name="id_resultado" ColumnName="id_resultado" />
+          <ScalarProperty Name="fk_area_pregunta" ColumnName="fk_area_pregunta" />
+          <ScalarProperty Name="cantidad_si" ColumnName="cantidad_si" />
+          <ScalarProperty Name="cantidad_no" ColumnName="cantidad_no" />
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="session">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.session">
+        <MappingFragment StoreEntitySet="session">
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="fecha_sesion" ColumnName="fecha_sesion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tsession">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.Tsession">
+        <MappingFragment StoreEntitySet="Tsession">
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="fecha_sesion" ColumnName="fecha_sesion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="CarreerDataBaseModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+          <ScalarProperty Name="edad_usuario" ColumnName="edad_usuario" />
+          <ScalarProperty Name="correo_usuario" ColumnName="correo_usuario" />
+          <ScalarProperty Name="pass_usuario" ColumnName="pass_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CarrierIntegrator.pregunta_area>
+
+@{
+    ViewBag.Title = "Saquese de aqui a la verga perro";
+}
+
+<h2>Pregujntas y arias</h2>
+
+<p>
+    @Html.ActionLink("Crear -nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>
+            @Html.DisplayNameFor(model => model.areas_car.nombre_area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preguntas.pregunta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.id_pregunta_area
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.areas_car.nombre_area)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preguntas.pregunta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_pregunta_area })
+        </td>
+    </tr>
+}
+
+</table>

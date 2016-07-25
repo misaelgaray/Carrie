@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CarrierIntegrator.Preguntas>
+
+@{
+    ViewBag.Title = "Preguntas";
+}
+
+<h2>Todas las preguntas</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pregunta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pregunta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_pregunta })
+        </td>
+    </tr>
+}
+
+</table>

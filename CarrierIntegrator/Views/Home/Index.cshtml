@@ -1,0 +1,65 @@
+﻿<div class="jumbotron">
+    <h1>Carrierr</h1>
+    <p class="lead">Carrier es el sistema basado en inteligencia artifical del mas alto nivel que te ayuda a elegir tu carrera "<i>La araganeria es un mal que atañe los bastardos de estos tiempos</i>"  -Edwin Resendiz</p>
+    <p><a href="http://carrierintegrator.azurewebsites.net/Usuarios" class="btn btn-primary btn-lg">Registrarse &raquo;</a></p>
+</div>
+<div class="row" ng-app>
+    <div class="col-md-8">
+        <h2>Api Description</h2>
+        <ul>
+            <li><div class="well">Sesiones sin usuario <a href="http://carrierintegrator.azurewebsites.net/api/Apisessions/">http://carrierintegrator.azurewebsites.net/api/Apisessions/</a> </div></li>
+            <li><div class="well">
+                Iniciar Sesion con usuario y password </br>
+                <div class="well">
+                    <label>Usuario</label>
+                    <input type="text" class="form-control" ng-model="user"><br>
+                    <label>Password</label>
+                    <input type="password" class="form-control" ng-model="pass">
+                    <a href="http://carrierintegrator.azurewebsites.net/api/Apisessions/{{user}}/{{pass}}">http://carrierintegrator.azurewebsites.net/api/Apisessions/ {{user}}  /{{pass}} </a>
+                </div></div>
+            </li>
+            <li><div class="well">
+                Todas las preguntas <a href="http://carrierintegrator.azurewebsites.net/Preguntas/Preguntas">http://carrierintegrator.azurewebsites.net/Preguntas/Preguntas</a></div>
+            </li>
+            <li><div class="well">
+                Preguntas Por Id 
+                <label>Id Pregunta</label>
+                <input type="number" class="form-control" ng-model="id_pregunta">
+                <a href="http://carrierintegrator.azurewebsites.net/Preguntas/PreguntasById/{{id_pregunta}}">http://carrierintegrator.azurewebsites.net/Preguntas/PreguntasById/ {{id_pregunta}}</a></div>
+            </li>
+            <li>
+                <div class="well">
+                Mandar respuesta
+                <label>Id Pregunta</label>
+                <input type="number" class="form-control" ng-model="id_preg">
+                <label>Respuesta Si/NO/NO SE</label>
+                <select class="form-control" ng-model="respuesta">
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                    <option value="NO SE">NO SE</option>
+                </select>
+                <label>Id Session</label>
+                <input type="number" class="form-control" ng-model="token">
+                <a href="#expand" data-toggle="collapse" aria-expanded="false" aria-controls="expand">api/ApiRespuestas/{{id_preg}}/{{respuesta}}/{{token}}</a>
+                <div class="collapse" id="expand">
+                    <h2>Jaja pa' que quieres saber eso, jaja Saludos</h2>
+                </div>
+                </div>
+            </li>
+            <li>
+                <div class="well">
+                Registrar nuevo usuario
+                <label>Nombre</label>
+                <input type="text" class="form-control" ng-model="nomb">
+                <label>Correo</label>
+                <input type="text" class="form-control" ng-model="email">
+                <label>Password</label>
+                <input type="password" class="form-control" ng-model="pa">
+                
+                    <a href="http://carrierintegrator.azurewebsites.net/{{nomb}}/{{email}}/{{pa}}">http://carrierintegrator.azurewebsites.net/api/ApiUsuarios/{{nomb}}/{{email}}/{{pa}}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+</div>
