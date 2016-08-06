@@ -19,7 +19,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 </head>
 <body>
-  <!--  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,22 +27,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Carrier Developers < >", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    <li><a href="/Preguntas/">Preguntas</a></li>
+                    <li><a href="/preguntas_en_ad/">Resultados</a></li>
+                    <li><a href="/Usuarios/">Usuarios</a></li>
+                    <li><a href="/pregunta_area/">Areas</a></li>
+                    <li><a href="/Carreras/">Carreras</a></li>
                 </ul>
             </div>
         </div>
     </div>
-      -->
+      
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Sistema super Perro pinche animal experto</p>
+            <p>&copy; @DateTime.Now.Year -Sistema de Orientación vociacional</p>
         </footer>
     </div>
 

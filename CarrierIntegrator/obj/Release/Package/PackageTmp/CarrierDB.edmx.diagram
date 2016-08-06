@@ -5,33 +5,33 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6a842af880344493a98d720c908334cf" Name="Diagram1">
-        <EntityTypeShape EntityType="CarreerDataBaseModel.areas_car" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.Carreras" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.pregunta_area" Width="1.5" PointX="8.25" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.Preguntas" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.preguntas_en_ad" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.preguntas_en_at" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.resultado_en_ad" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.resultado_en_at" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.session" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.Tsession" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarreerDataBaseModel.Usuarios" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__Carreras__fk_are__0519C6AF" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__pregunta___fk_ar__1273C1CD" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__fk_ar__1CF15040" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__fk_ar__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__pregunta___fk_pr__117F9D94" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_pr__173876EA" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_pr__21B6055D" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_us__182C9B23" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__id_se__3E52440B" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_us__22AA2996" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__id_se__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__id_se__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__id_se__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__session__id_usua__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="CarreerDataBaseModel.FK__Tsession__id_usu__3D5E1FD2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.areas_car" Width="1.5" PointX="6" PointY="18" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.Carreras" Width="1.5" PointX="8.25" PointY="21" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.pregunta_area" Width="1.5" PointX="11.25" PointY="12.5" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.Preguntas" Width="1.5" PointX="6" PointY="6.5" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.preguntas_en_ad" Width="1.5" PointX="8.25" PointY="10.25" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.preguntas_en_at" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.resultado_en_ad" Width="1.5" PointX="8.25" PointY="14" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.resultado_en_at" Width="1.5" PointX="5.25" PointY="14" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.session" Width="1.5" PointX="3" PointY="16.25" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.Tsession" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.Usuarios" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="CarreerDataBaseModel.database_firewall_rules" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__Carreras__fk_are__49C3F6B7" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__pregunta___fk_ar__4BAC3F29" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__fk_ar__52593CB8" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__fk_ar__5441852A" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__pregunta___fk_pr__4AB81AF0" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_pr__4CA06362" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_pr__4F7CD00D" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_us__4D94879B" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__id_se__4E88ABD4" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__fk_us__5070F446" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__preguntas__id_se__5165187F" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__id_se__534D60F1" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__id_se__5535A963" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__session__id_usua__5629CD9C" />
+        <AssociationConnector Association="CarreerDataBaseModel.FK__Tsession__id_usu__571DF1D5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

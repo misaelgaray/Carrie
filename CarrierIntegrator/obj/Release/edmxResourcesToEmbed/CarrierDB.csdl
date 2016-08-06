@@ -1,396 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CarreerDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="areas_car">
-    <Key>
-      <PropertyRef Name="id_area" />
-    </Key>
-    <Property Name="id_area" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombre_area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="descripcion_area" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Carreras" Relationship="Self.FK__Carreras__fk_are__0519C6AF" FromRole="areas_car" ToRole="Carreras" />
-    <NavigationProperty Name="pregunta_area" Relationship="Self.FK__pregunta___fk_ar__1273C1CD" FromRole="areas_car" ToRole="pregunta_area" />
-    <NavigationProperty Name="resultado_en_ad" Relationship="Self.FK__resultado__fk_ar__1CF15040" FromRole="areas_car" ToRole="resultado_en_ad" />
-    <NavigationProperty Name="resultado_en_at" Relationship="Self.FK__resultado__fk_ar__276EDEB3" FromRole="areas_car" ToRole="resultado_en_at" />
-  </EntityType>
-  <EntityType Name="Carreras">
-    <Key>
-      <PropertyRef Name="id_carrera" />
-    </Key>
-    <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fk_area" Type="Int32" />
-    <Property Name="nombre_carrera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="descripcion_carrera" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="areas_car" Relationship="Self.FK__Carreras__fk_are__0519C6AF" FromRole="Carreras" ToRole="areas_car" />
-  </EntityType>
-  <EntityType Name="pregunta_area">
-    <Key>
-      <PropertyRef Name="id_pregunta_area" />
-    </Key>
-    <Property Name="id_pregunta_area" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fk_pregunta" Type="Int32" />
-    <Property Name="fk_area" Type="Int32" />
-    <NavigationProperty Name="areas_car" Relationship="Self.FK__pregunta___fk_ar__1273C1CD" FromRole="pregunta_area" ToRole="areas_car" />
-    <NavigationProperty Name="Preguntas" Relationship="Self.FK__pregunta___fk_pr__117F9D94" FromRole="pregunta_area" ToRole="Preguntas" />
-  </EntityType>
-  <EntityType Name="Preguntas">
-    <Key>
-      <PropertyRef Name="id_pregunta" />
-    </Key>
-    <Property Name="id_pregunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="pregunta" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="pregunta_area" Relationship="Self.FK__pregunta___fk_pr__117F9D94" FromRole="Preguntas" ToRole="pregunta_area" />
-    <NavigationProperty Name="preguntas_en_ad" Relationship="Self.FK__preguntas__fk_pr__173876EA" FromRole="Preguntas" ToRole="preguntas_en_ad" />
-    <NavigationProperty Name="preguntas_en_at" Relationship="Self.FK__preguntas__fk_pr__21B6055D" FromRole="Preguntas" ToRole="preguntas_en_at" />
-  </EntityType>
-  <EntityType Name="preguntas_en_ad">
-    <Key>
-      <PropertyRef Name="id_respuesta" />
-    </Key>
-    <Property Name="id_respuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fk_pregunta" Type="Int32" />
-    <Property Name="fk_usuario" Type="Int32" />
-    <Property Name="respuesta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="id_session" Type="Int32" />
-    <NavigationProperty Name="Preguntas" Relationship="Self.FK__preguntas__fk_pr__173876EA" FromRole="preguntas_en_ad" ToRole="Preguntas" />
-    <NavigationProperty Name="Usuarios" Relationship="Self.FK__preguntas__fk_us__182C9B23" FromRole="preguntas_en_ad" ToRole="Usuarios" />
-    <NavigationProperty Name="Tsession" Relationship="Self.FK__preguntas__id_se__3E52440B" FromRole="preguntas_en_ad" ToRole="Tsession" />
-  </EntityType>
-  <EntityType Name="preguntas_en_at">
-    <Key>
-      <PropertyRef Name="id_respuesta" />
-    </Key>
-    <Property Name="id_respuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fk_pregunta" Type="Int32" />
-    <Property Name="fk_usuario" Type="Int32" />
-    <Property Name="respuesta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="id_session" Type="Int32" />
-    <NavigationProperty Name="Preguntas" Relationship="Self.FK__preguntas__fk_pr__21B6055D" FromRole="preguntas_en_at" ToRole="Preguntas" />
-    <NavigationProperty Name="Usuarios" Relationship="Self.FK__preguntas__fk_us__22AA2996" FromRole="preguntas_en_at" ToRole="Usuarios" />
-    <NavigationProperty Name="Tsession" Relationship="Self.FK__preguntas__id_se__3F466844" FromRole="preguntas_en_at" ToRole="Tsession" />
-  </EntityType>
-  <EntityType Name="resultado_en_ad">
-    <Key>
-      <PropertyRef Name="id_resultado" />
-    </Key>
-    <Property Name="id_resultado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fk_area_pregunta" Type="Int32" />
-    <Property Name="cantidad_si" Type="Int32" />
-    <Property Name="cantidad_no" Type="Int32" />
-    <Property Name="id_session" Type="Int32" />
-    <NavigationProperty Name="areas_car" Relationship="Self.FK__resultado__fk_ar__1CF15040" FromRole="resultado_en_ad" ToRole="areas_car" />
-    <NavigationProperty Name="Tsession" Relationship="Self.FK__resultado__id_se__412EB0B6" FromRole="resultado_en_ad" ToRole="Tsession" />
-  </EntityType>
-  <EntityType Name="resultado_en_at">
-    <Key>
-      <PropertyRef Name="id_resultado" />
-    </Key>
-    <Property Name="id_resultado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fk_area_pregunta" Type="Int32" />
-    <Property Name="cantidad_si" Type="Int32" />
-    <Property Name="cantidad_no" Type="Int32" />
-    <Property Name="id_session" Type="Int32" />
-    <NavigationProperty Name="areas_car" Relationship="Self.FK__resultado__fk_ar__276EDEB3" FromRole="resultado_en_at" ToRole="areas_car" />
-    <NavigationProperty Name="Tsession" Relationship="Self.FK__resultado__id_se__403A8C7D" FromRole="resultado_en_at" ToRole="Tsession" />
-  </EntityType>
-  <EntityType Name="session">
-    <Key>
-      <PropertyRef Name="id_session" />
-    </Key>
-    <Property Name="id_session" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_usuario" Type="Int32" />
-    <Property Name="fecha_sesion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Usuarios" Relationship="Self.FK__session__id_usua__38996AB5" FromRole="session" ToRole="Usuarios" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="Tsession">
-    <Key>
-      <PropertyRef Name="id_session" />
-    </Key>
-    <Property Name="id_session" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_usuario" Type="Int32" />
-    <Property Name="fecha_sesion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="preguntas_en_ad" Relationship="Self.FK__preguntas__id_se__3E52440B" FromRole="Tsession" ToRole="preguntas_en_ad" />
-    <NavigationProperty Name="preguntas_en_at" Relationship="Self.FK__preguntas__id_se__3F466844" FromRole="Tsession" ToRole="preguntas_en_at" />
-    <NavigationProperty Name="resultado_en_ad" Relationship="Self.FK__resultado__id_se__412EB0B6" FromRole="Tsession" ToRole="resultado_en_ad" />
-    <NavigationProperty Name="resultado_en_at" Relationship="Self.FK__resultado__id_se__403A8C7D" FromRole="Tsession" ToRole="resultado_en_at" />
-    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Tsession__id_usu__3D5E1FD2" FromRole="Tsession" ToRole="Usuarios" />
-  </EntityType>
-  <EntityType Name="Usuarios">
-    <Key>
-      <PropertyRef Name="id_usuario" />
-    </Key>
-    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombre_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="edad_usuario" Type="Int32" />
-    <Property Name="correo_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="pass_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="preguntas_en_ad" Relationship="Self.FK__preguntas__fk_us__182C9B23" FromRole="Usuarios" ToRole="preguntas_en_ad" />
-    <NavigationProperty Name="preguntas_en_at" Relationship="Self.FK__preguntas__fk_us__22AA2996" FromRole="Usuarios" ToRole="preguntas_en_at" />
-    <NavigationProperty Name="session" Relationship="Self.FK__session__id_usua__38996AB5" FromRole="Usuarios" ToRole="session" />
-    <NavigationProperty Name="Tsession" Relationship="Self.FK__Tsession__id_usu__3D5E1FD2" FromRole="Usuarios" ToRole="Tsession" />
-  </EntityType>
-  <Association Name="FK__Carreras__fk_are__0519C6AF">
-    <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
-    <End Role="Carreras" Type="Self.Carreras" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="areas_car">
-        <PropertyRef Name="id_area" />
-      </Principal>
-      <Dependent Role="Carreras">
-        <PropertyRef Name="fk_area" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__pregunta___fk_ar__1273C1CD">
-    <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
-    <End Role="pregunta_area" Type="Self.pregunta_area" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="areas_car">
-        <PropertyRef Name="id_area" />
-      </Principal>
-      <Dependent Role="pregunta_area">
-        <PropertyRef Name="fk_area" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__resultado__fk_ar__1CF15040">
-    <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
-    <End Role="resultado_en_ad" Type="Self.resultado_en_ad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="areas_car">
-        <PropertyRef Name="id_area" />
-      </Principal>
-      <Dependent Role="resultado_en_ad">
-        <PropertyRef Name="fk_area_pregunta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__resultado__fk_ar__276EDEB3">
-    <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
-    <End Role="resultado_en_at" Type="Self.resultado_en_at" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="areas_car">
-        <PropertyRef Name="id_area" />
-      </Principal>
-      <Dependent Role="resultado_en_at">
-        <PropertyRef Name="fk_area_pregunta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__pregunta___fk_pr__117F9D94">
-    <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="0..1" />
-    <End Role="pregunta_area" Type="Self.pregunta_area" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Preguntas">
-        <PropertyRef Name="id_pregunta" />
-      </Principal>
-      <Dependent Role="pregunta_area">
-        <PropertyRef Name="fk_pregunta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__preguntas__fk_pr__173876EA">
-    <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="0..1" />
-    <End Role="preguntas_en_ad" Type="Self.preguntas_en_ad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Preguntas">
-        <PropertyRef Name="id_pregunta" />
-      </Principal>
-      <Dependent Role="preguntas_en_ad">
-        <PropertyRef Name="fk_pregunta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__preguntas__fk_pr__21B6055D">
-    <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="0..1" />
-    <End Role="preguntas_en_at" Type="Self.preguntas_en_at" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Preguntas">
-        <PropertyRef Name="id_pregunta" />
-      </Principal>
-      <Dependent Role="preguntas_en_at">
-        <PropertyRef Name="fk_pregunta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__preguntas__fk_us__182C9B23">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-    <End Role="preguntas_en_ad" Type="Self.preguntas_en_ad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id_usuario" />
-      </Principal>
-      <Dependent Role="preguntas_en_ad">
-        <PropertyRef Name="fk_usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__preguntas__id_se__3E52440B">
-    <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
-    <End Role="preguntas_en_ad" Type="Self.preguntas_en_ad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tsession">
-        <PropertyRef Name="id_session" />
-      </Principal>
-      <Dependent Role="preguntas_en_ad">
-        <PropertyRef Name="id_session" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__preguntas__fk_us__22AA2996">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-    <End Role="preguntas_en_at" Type="Self.preguntas_en_at" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id_usuario" />
-      </Principal>
-      <Dependent Role="preguntas_en_at">
-        <PropertyRef Name="fk_usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__preguntas__id_se__3F466844">
-    <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
-    <End Role="preguntas_en_at" Type="Self.preguntas_en_at" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tsession">
-        <PropertyRef Name="id_session" />
-      </Principal>
-      <Dependent Role="preguntas_en_at">
-        <PropertyRef Name="id_session" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__resultado__id_se__412EB0B6">
-    <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
-    <End Role="resultado_en_ad" Type="Self.resultado_en_ad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tsession">
-        <PropertyRef Name="id_session" />
-      </Principal>
-      <Dependent Role="resultado_en_ad">
-        <PropertyRef Name="id_session" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__resultado__id_se__403A8C7D">
-    <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
-    <End Role="resultado_en_at" Type="Self.resultado_en_at" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tsession">
-        <PropertyRef Name="id_session" />
-      </Principal>
-      <Dependent Role="resultado_en_at">
-        <PropertyRef Name="id_session" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__session__id_usua__38996AB5">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-    <End Role="session" Type="Self.session" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id_usuario" />
-      </Principal>
-      <Dependent Role="session">
-        <PropertyRef Name="id_usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Tsession__id_usu__3D5E1FD2">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-    <End Role="Tsession" Type="Self.Tsession" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id_usuario" />
-      </Principal>
-      <Dependent Role="Tsession">
-        <PropertyRef Name="id_usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="CarreerDataBaseEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="areas_car" EntityType="Self.areas_car" />
-    <EntitySet Name="Carreras" EntityType="Self.Carreras" />
-    <EntitySet Name="pregunta_area" EntityType="Self.pregunta_area" />
-    <EntitySet Name="Preguntas" EntityType="Self.Preguntas" />
-    <EntitySet Name="preguntas_en_ad" EntityType="Self.preguntas_en_ad" />
-    <EntitySet Name="preguntas_en_at" EntityType="Self.preguntas_en_at" />
-    <EntitySet Name="resultado_en_ad" EntityType="Self.resultado_en_ad" />
-    <EntitySet Name="resultado_en_at" EntityType="Self.resultado_en_at" />
-    <EntitySet Name="session" EntityType="Self.session" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-    <EntitySet Name="Tsession" EntityType="Self.Tsession" />
-    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-    <AssociationSet Name="FK__Carreras__fk_are__0519C6AF" Association="Self.FK__Carreras__fk_are__0519C6AF">
-      <End Role="areas_car" EntitySet="areas_car" />
-      <End Role="Carreras" EntitySet="Carreras" />
-    </AssociationSet>
-    <AssociationSet Name="FK__pregunta___fk_ar__1273C1CD" Association="Self.FK__pregunta___fk_ar__1273C1CD">
-      <End Role="areas_car" EntitySet="areas_car" />
-      <End Role="pregunta_area" EntitySet="pregunta_area" />
-    </AssociationSet>
-    <AssociationSet Name="FK__resultado__fk_ar__1CF15040" Association="Self.FK__resultado__fk_ar__1CF15040">
-      <End Role="areas_car" EntitySet="areas_car" />
-      <End Role="resultado_en_ad" EntitySet="resultado_en_ad" />
-    </AssociationSet>
-    <AssociationSet Name="FK__resultado__fk_ar__276EDEB3" Association="Self.FK__resultado__fk_ar__276EDEB3">
-      <End Role="areas_car" EntitySet="areas_car" />
-      <End Role="resultado_en_at" EntitySet="resultado_en_at" />
-    </AssociationSet>
-    <AssociationSet Name="FK__pregunta___fk_pr__117F9D94" Association="Self.FK__pregunta___fk_pr__117F9D94">
-      <End Role="Preguntas" EntitySet="Preguntas" />
-      <End Role="pregunta_area" EntitySet="pregunta_area" />
-    </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_pr__173876EA" Association="Self.FK__preguntas__fk_pr__173876EA">
-      <End Role="Preguntas" EntitySet="Preguntas" />
-      <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
-    </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_pr__21B6055D" Association="Self.FK__preguntas__fk_pr__21B6055D">
-      <End Role="Preguntas" EntitySet="Preguntas" />
-      <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
-    </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_us__182C9B23" Association="Self.FK__preguntas__fk_us__182C9B23">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
-    </AssociationSet>
-    <AssociationSet Name="FK__preguntas__id_se__3E52440B" Association="Self.FK__preguntas__id_se__3E52440B">
-      <End Role="Tsession" EntitySet="Tsession" />
-      <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
-    </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_us__22AA2996" Association="Self.FK__preguntas__fk_us__22AA2996">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
-    </AssociationSet>
-    <AssociationSet Name="FK__preguntas__id_se__3F466844" Association="Self.FK__preguntas__id_se__3F466844">
-      <End Role="Tsession" EntitySet="Tsession" />
-      <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
-    </AssociationSet>
-    <AssociationSet Name="FK__resultado__id_se__412EB0B6" Association="Self.FK__resultado__id_se__412EB0B6">
-      <End Role="Tsession" EntitySet="Tsession" />
-      <End Role="resultado_en_ad" EntitySet="resultado_en_ad" />
-    </AssociationSet>
-    <AssociationSet Name="FK__resultado__id_se__403A8C7D" Association="Self.FK__resultado__id_se__403A8C7D">
-      <End Role="Tsession" EntitySet="Tsession" />
-      <End Role="resultado_en_at" EntitySet="resultado_en_at" />
-    </AssociationSet>
-    <AssociationSet Name="FK__session__id_usua__38996AB5" Association="Self.FK__session__id_usua__38996AB5">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="session" EntitySet="session" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Tsession__id_usu__3D5E1FD2" Association="Self.FK__Tsession__id_usu__3D5E1FD2">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Tsession" EntitySet="Tsession" />
-    </AssociationSet>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -421,6 +31,104 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="spConteoArea" ReturnType="Collection(CarreerDataBaseModel.spConteoArea_Result)">
+      <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+      <Parameter Name="respuesta" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spMostrarCarreras" ReturnType="Collection(CarreerDataBaseModel.spMostrarCarreras_Result)">
+      <Parameter Name="idArea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spPreguntasSelect" ReturnType="Collection(CarreerDataBaseModel.spPreguntasSelect_Result)">
+      <Parameter Name="all" Mode="In" Type="Boolean" />
+      <Parameter Name="area" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spRespuesta_Ad_Insert">
+      <Parameter Name="idArea" Mode="In" Type="Int32" />
+      <Parameter Name="cantidadSi" Mode="In" Type="Int32" />
+      <Parameter Name="cantidadNo" Mode="In" Type="Int32" />
+      <Parameter Name="idSession" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spRetroalimientacionCarreras" ReturnType="Collection(String)">
+      <Parameter Name="idArea" Mode="In" Type="Int32" />
+      <Parameter Name="idCarrera" Mode="In" Type="Int32" />
+      <Parameter Name="retro" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spForward_tracking" ReturnType="Collection(CarreerDataBaseModel.spForward_tracking_Result)">
+      <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+      <Parameter Name="respuesta" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="areas_car" EntityType="CarreerDataBaseModel.areas_car" />
+    <EntitySet Name="Carreras" EntityType="CarreerDataBaseModel.Carreras" />
+    <EntitySet Name="pregunta_area" EntityType="CarreerDataBaseModel.pregunta_area" />
+    <EntitySet Name="Preguntas" EntityType="CarreerDataBaseModel.Preguntas" />
+    <EntitySet Name="preguntas_en_ad" EntityType="CarreerDataBaseModel.preguntas_en_ad" />
+    <EntitySet Name="preguntas_en_at" EntityType="CarreerDataBaseModel.preguntas_en_at" />
+    <EntitySet Name="resultado_en_ad" EntityType="CarreerDataBaseModel.resultado_en_ad" />
+    <EntitySet Name="resultado_en_at" EntityType="CarreerDataBaseModel.resultado_en_at" />
+    <EntitySet Name="session" EntityType="CarreerDataBaseModel.session" />
+    <EntitySet Name="Tsession" EntityType="CarreerDataBaseModel.Tsession" />
+    <EntitySet Name="Usuarios" EntityType="CarreerDataBaseModel.Usuarios" />
+    <EntitySet Name="database_firewall_rules" EntityType="CarreerDataBaseModel.database_firewall_rules" />
+    <AssociationSet Name="FK__Carreras__fk_are__49C3F6B7" Association="CarreerDataBaseModel.FK__Carreras__fk_are__49C3F6B7">
+      <End Role="areas_car" EntitySet="areas_car" />
+      <End Role="Carreras" EntitySet="Carreras" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pregunta___fk_ar__4BAC3F29" Association="CarreerDataBaseModel.FK__pregunta___fk_ar__4BAC3F29">
+      <End Role="areas_car" EntitySet="areas_car" />
+      <End Role="pregunta_area" EntitySet="pregunta_area" />
+    </AssociationSet>
+    <AssociationSet Name="FK__resultado__fk_ar__52593CB8" Association="CarreerDataBaseModel.FK__resultado__fk_ar__52593CB8">
+      <End Role="areas_car" EntitySet="areas_car" />
+      <End Role="resultado_en_ad" EntitySet="resultado_en_ad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__resultado__fk_ar__5441852A" Association="CarreerDataBaseModel.FK__resultado__fk_ar__5441852A">
+      <End Role="areas_car" EntitySet="areas_car" />
+      <End Role="resultado_en_at" EntitySet="resultado_en_at" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pregunta___fk_pr__4AB81AF0" Association="CarreerDataBaseModel.FK__pregunta___fk_pr__4AB81AF0">
+      <End Role="Preguntas" EntitySet="Preguntas" />
+      <End Role="pregunta_area" EntitySet="pregunta_area" />
+    </AssociationSet>
+    <AssociationSet Name="FK__preguntas__fk_pr__4CA06362" Association="CarreerDataBaseModel.FK__preguntas__fk_pr__4CA06362">
+      <End Role="Preguntas" EntitySet="Preguntas" />
+      <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__preguntas__fk_pr__4F7CD00D" Association="CarreerDataBaseModel.FK__preguntas__fk_pr__4F7CD00D">
+      <End Role="Preguntas" EntitySet="Preguntas" />
+      <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
+    </AssociationSet>
+    <AssociationSet Name="FK__preguntas__fk_us__4D94879B" Association="CarreerDataBaseModel.FK__preguntas__fk_us__4D94879B">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__preguntas__id_se__4E88ABD4" Association="CarreerDataBaseModel.FK__preguntas__id_se__4E88ABD4">
+      <End Role="Tsession" EntitySet="Tsession" />
+      <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__preguntas__fk_us__5070F446" Association="CarreerDataBaseModel.FK__preguntas__fk_us__5070F446">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
+    </AssociationSet>
+    <AssociationSet Name="FK__preguntas__id_se__5165187F" Association="CarreerDataBaseModel.FK__preguntas__id_se__5165187F">
+      <End Role="Tsession" EntitySet="Tsession" />
+      <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
+    </AssociationSet>
+    <AssociationSet Name="FK__resultado__id_se__534D60F1" Association="CarreerDataBaseModel.FK__resultado__id_se__534D60F1">
+      <End Role="Tsession" EntitySet="Tsession" />
+      <End Role="resultado_en_ad" EntitySet="resultado_en_ad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__resultado__id_se__5535A963" Association="CarreerDataBaseModel.FK__resultado__id_se__5535A963">
+      <End Role="Tsession" EntitySet="Tsession" />
+      <End Role="resultado_en_at" EntitySet="resultado_en_at" />
+    </AssociationSet>
+    <AssociationSet Name="FK__session__id_usua__5629CD9C" Association="CarreerDataBaseModel.FK__session__id_usua__5629CD9C">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="session" EntitySet="session" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tsession__id_usu__571DF1D5" Association="CarreerDataBaseModel.FK__Tsession__id_usu__571DF1D5">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Tsession" EntitySet="Tsession" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -433,4 +141,355 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <ComplexType Name="spConteoArea_Result">
+    <Property Type="Int32" Name="valueMax" Nullable="true" />
+    <Property Type="String" Name="field" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="idArea" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spForward_tracking_Result">
+    <Property Type="Int32" Name="id_session" Nullable="true" />
+    <Property Type="String" Name="nombre_usuario" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="fk_area" Nullable="true" />
+    <Property Type="String" Name="nombre_area" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="id_pregunta" Nullable="false" />
+    <Property Type="String" Name="pregunta" Nullable="true" MaxLength="8000" />
+    <Property Type="String" Name="respuesta" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="spMostrarCarreras_Result">
+    <Property Type="Int32" Name="id_area" Nullable="false" />
+    <Property Type="String" Name="nombre_area" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="id_carrera" Nullable="false" />
+    <Property Type="String" Name="nombre_carrera" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="descripcion_carrera" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="spPreguntasSelect_Result">
+    <Property Type="Int32" Name="id_pregunta" Nullable="false" />
+    <Property Type="String" Name="pregunta" Nullable="true" MaxLength="8000" />
+    <Property Type="Int32" Name="id_area" Nullable="false" />
+    <Property Type="String" Name="nombre_area" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="areas_car">
+    <Key>
+      <PropertyRef Name="id_area" />
+    </Key>
+    <Property Name="id_area" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion_area" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Carreras" Relationship="CarreerDataBaseModel.FK__Carreras__fk_are__49C3F6B7" FromRole="areas_car" ToRole="Carreras" />
+    <NavigationProperty Name="pregunta_area" Relationship="CarreerDataBaseModel.FK__pregunta___fk_ar__4BAC3F29" FromRole="areas_car" ToRole="pregunta_area" />
+    <NavigationProperty Name="resultado_en_ad" Relationship="CarreerDataBaseModel.FK__resultado__fk_ar__52593CB8" FromRole="areas_car" ToRole="resultado_en_ad" />
+    <NavigationProperty Name="resultado_en_at" Relationship="CarreerDataBaseModel.FK__resultado__fk_ar__5441852A" FromRole="areas_car" ToRole="resultado_en_at" />
+  </EntityType>
+  <EntityType Name="Carreras">
+    <Key>
+      <PropertyRef Name="id_carrera" />
+    </Key>
+    <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_area" Type="Int32" />
+    <Property Name="nombre_carrera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion_carrera" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="areas_car" Relationship="CarreerDataBaseModel.FK__Carreras__fk_are__49C3F6B7" FromRole="Carreras" ToRole="areas_car" />
+  </EntityType>
+  <EntityType Name="pregunta_area">
+    <Key>
+      <PropertyRef Name="id_pregunta_area" />
+    </Key>
+    <Property Name="id_pregunta_area" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_pregunta" Type="Int32" />
+    <Property Name="fk_area" Type="Int32" />
+    <NavigationProperty Name="areas_car" Relationship="CarreerDataBaseModel.FK__pregunta___fk_ar__4BAC3F29" FromRole="pregunta_area" ToRole="areas_car" />
+    <NavigationProperty Name="Preguntas" Relationship="CarreerDataBaseModel.FK__pregunta___fk_pr__4AB81AF0" FromRole="pregunta_area" ToRole="Preguntas" />
+  </EntityType>
+  <EntityType Name="Preguntas">
+    <Key>
+      <PropertyRef Name="id_pregunta" />
+    </Key>
+    <Property Name="id_pregunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pregunta" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pregunta_area" Relationship="CarreerDataBaseModel.FK__pregunta___fk_pr__4AB81AF0" FromRole="Preguntas" ToRole="pregunta_area" />
+    <NavigationProperty Name="preguntas_en_ad" Relationship="CarreerDataBaseModel.FK__preguntas__fk_pr__4CA06362" FromRole="Preguntas" ToRole="preguntas_en_ad" />
+    <NavigationProperty Name="preguntas_en_at" Relationship="CarreerDataBaseModel.FK__preguntas__fk_pr__4F7CD00D" FromRole="Preguntas" ToRole="preguntas_en_at" />
+  </EntityType>
+  <EntityType Name="preguntas_en_ad">
+    <Key>
+      <PropertyRef Name="id_respuesta" />
+    </Key>
+    <Property Name="id_respuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_pregunta" Type="Int32" />
+    <Property Name="fk_usuario" Type="Int32" />
+    <Property Name="respuesta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="id_session" Type="Int32" />
+    <NavigationProperty Name="Preguntas" Relationship="CarreerDataBaseModel.FK__preguntas__fk_pr__4CA06362" FromRole="preguntas_en_ad" ToRole="Preguntas" />
+    <NavigationProperty Name="Usuarios" Relationship="CarreerDataBaseModel.FK__preguntas__fk_us__4D94879B" FromRole="preguntas_en_ad" ToRole="Usuarios" />
+    <NavigationProperty Name="Tsession" Relationship="CarreerDataBaseModel.FK__preguntas__id_se__4E88ABD4" FromRole="preguntas_en_ad" ToRole="Tsession" />
+  </EntityType>
+  <EntityType Name="preguntas_en_at">
+    <Key>
+      <PropertyRef Name="id_respuesta" />
+    </Key>
+    <Property Name="id_respuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_pregunta" Type="Int32" />
+    <Property Name="fk_usuario" Type="Int32" />
+    <Property Name="respuesta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="id_session" Type="Int32" />
+    <NavigationProperty Name="Preguntas" Relationship="CarreerDataBaseModel.FK__preguntas__fk_pr__4F7CD00D" FromRole="preguntas_en_at" ToRole="Preguntas" />
+    <NavigationProperty Name="Usuarios" Relationship="CarreerDataBaseModel.FK__preguntas__fk_us__5070F446" FromRole="preguntas_en_at" ToRole="Usuarios" />
+    <NavigationProperty Name="Tsession" Relationship="CarreerDataBaseModel.FK__preguntas__id_se__5165187F" FromRole="preguntas_en_at" ToRole="Tsession" />
+  </EntityType>
+  <EntityType Name="resultado_en_ad">
+    <Key>
+      <PropertyRef Name="id_resultado" />
+    </Key>
+    <Property Name="id_resultado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_area_pregunta" Type="Int32" />
+    <Property Name="cantidad_si" Type="Int32" />
+    <Property Name="cantidad_no" Type="Int32" />
+    <Property Name="id_session" Type="Int32" />
+    <NavigationProperty Name="areas_car" Relationship="CarreerDataBaseModel.FK__resultado__fk_ar__52593CB8" FromRole="resultado_en_ad" ToRole="areas_car" />
+    <NavigationProperty Name="Tsession" Relationship="CarreerDataBaseModel.FK__resultado__id_se__534D60F1" FromRole="resultado_en_ad" ToRole="Tsession" />
+  </EntityType>
+  <EntityType Name="resultado_en_at">
+    <Key>
+      <PropertyRef Name="id_resultado" />
+    </Key>
+    <Property Name="id_resultado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_area_pregunta" Type="Int32" />
+    <Property Name="cantidad_si" Type="Int32" />
+    <Property Name="cantidad_no" Type="Int32" />
+    <Property Name="id_session" Type="Int32" />
+    <NavigationProperty Name="areas_car" Relationship="CarreerDataBaseModel.FK__resultado__fk_ar__5441852A" FromRole="resultado_en_at" ToRole="areas_car" />
+    <NavigationProperty Name="Tsession" Relationship="CarreerDataBaseModel.FK__resultado__id_se__5535A963" FromRole="resultado_en_at" ToRole="Tsession" />
+  </EntityType>
+  <EntityType Name="session">
+    <Key>
+      <PropertyRef Name="id_session" />
+    </Key>
+    <Property Name="id_session" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="fecha_sesion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Usuarios" Relationship="CarreerDataBaseModel.FK__session__id_usua__5629CD9C" FromRole="session" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Tsession">
+    <Key>
+      <PropertyRef Name="id_session" />
+    </Key>
+    <Property Name="id_session" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="fecha_sesion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="preguntas_en_ad" Relationship="CarreerDataBaseModel.FK__preguntas__id_se__4E88ABD4" FromRole="Tsession" ToRole="preguntas_en_ad" />
+    <NavigationProperty Name="preguntas_en_at" Relationship="CarreerDataBaseModel.FK__preguntas__id_se__5165187F" FromRole="Tsession" ToRole="preguntas_en_at" />
+    <NavigationProperty Name="resultado_en_ad" Relationship="CarreerDataBaseModel.FK__resultado__id_se__534D60F1" FromRole="Tsession" ToRole="resultado_en_ad" />
+    <NavigationProperty Name="resultado_en_at" Relationship="CarreerDataBaseModel.FK__resultado__id_se__5535A963" FromRole="Tsession" ToRole="resultado_en_at" />
+    <NavigationProperty Name="Usuarios" Relationship="CarreerDataBaseModel.FK__Tsession__id_usu__571DF1D5" FromRole="Tsession" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="edad_usuario" Type="Int32" />
+    <Property Name="correo_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pass_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="preguntas_en_ad" Relationship="CarreerDataBaseModel.FK__preguntas__fk_us__4D94879B" FromRole="Usuarios" ToRole="preguntas_en_ad" />
+    <NavigationProperty Name="preguntas_en_at" Relationship="CarreerDataBaseModel.FK__preguntas__fk_us__5070F446" FromRole="Usuarios" ToRole="preguntas_en_at" />
+    <NavigationProperty Name="session" Relationship="CarreerDataBaseModel.FK__session__id_usua__5629CD9C" FromRole="Usuarios" ToRole="session" />
+    <NavigationProperty Name="Tsession" Relationship="CarreerDataBaseModel.FK__Tsession__id_usu__571DF1D5" FromRole="Usuarios" ToRole="Tsession" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK__Carreras__fk_are__49C3F6B7">
+    <End Type="CarreerDataBaseModel.areas_car" Role="areas_car" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.Carreras" Role="Carreras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="areas_car">
+        <PropertyRef Name="id_area" />
+      </Principal>
+      <Dependent Role="Carreras">
+        <PropertyRef Name="fk_area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pregunta___fk_ar__4BAC3F29">
+    <End Type="CarreerDataBaseModel.areas_car" Role="areas_car" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.pregunta_area" Role="pregunta_area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="areas_car">
+        <PropertyRef Name="id_area" />
+      </Principal>
+      <Dependent Role="pregunta_area">
+        <PropertyRef Name="fk_area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__resultado__fk_ar__52593CB8">
+    <End Type="CarreerDataBaseModel.areas_car" Role="areas_car" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.resultado_en_ad" Role="resultado_en_ad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="areas_car">
+        <PropertyRef Name="id_area" />
+      </Principal>
+      <Dependent Role="resultado_en_ad">
+        <PropertyRef Name="fk_area_pregunta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__resultado__fk_ar__5441852A">
+    <End Type="CarreerDataBaseModel.areas_car" Role="areas_car" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.resultado_en_at" Role="resultado_en_at" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="areas_car">
+        <PropertyRef Name="id_area" />
+      </Principal>
+      <Dependent Role="resultado_en_at">
+        <PropertyRef Name="fk_area_pregunta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pregunta___fk_pr__4AB81AF0">
+    <End Type="CarreerDataBaseModel.Preguntas" Role="Preguntas" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.pregunta_area" Role="pregunta_area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Preguntas">
+        <PropertyRef Name="id_pregunta" />
+      </Principal>
+      <Dependent Role="pregunta_area">
+        <PropertyRef Name="fk_pregunta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__preguntas__fk_pr__4CA06362">
+    <End Type="CarreerDataBaseModel.Preguntas" Role="Preguntas" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.preguntas_en_ad" Role="preguntas_en_ad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Preguntas">
+        <PropertyRef Name="id_pregunta" />
+      </Principal>
+      <Dependent Role="preguntas_en_ad">
+        <PropertyRef Name="fk_pregunta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__preguntas__fk_pr__4F7CD00D">
+    <End Type="CarreerDataBaseModel.Preguntas" Role="Preguntas" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.preguntas_en_at" Role="preguntas_en_at" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Preguntas">
+        <PropertyRef Name="id_pregunta" />
+      </Principal>
+      <Dependent Role="preguntas_en_at">
+        <PropertyRef Name="fk_pregunta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__preguntas__fk_us__4D94879B">
+    <End Type="CarreerDataBaseModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.preguntas_en_ad" Role="preguntas_en_ad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="preguntas_en_ad">
+        <PropertyRef Name="fk_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__preguntas__id_se__4E88ABD4">
+    <End Type="CarreerDataBaseModel.Tsession" Role="Tsession" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.preguntas_en_ad" Role="preguntas_en_ad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsession">
+        <PropertyRef Name="id_session" />
+      </Principal>
+      <Dependent Role="preguntas_en_ad">
+        <PropertyRef Name="id_session" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__preguntas__fk_us__5070F446">
+    <End Type="CarreerDataBaseModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.preguntas_en_at" Role="preguntas_en_at" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="preguntas_en_at">
+        <PropertyRef Name="fk_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__preguntas__id_se__5165187F">
+    <End Type="CarreerDataBaseModel.Tsession" Role="Tsession" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.preguntas_en_at" Role="preguntas_en_at" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsession">
+        <PropertyRef Name="id_session" />
+      </Principal>
+      <Dependent Role="preguntas_en_at">
+        <PropertyRef Name="id_session" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__resultado__id_se__534D60F1">
+    <End Type="CarreerDataBaseModel.Tsession" Role="Tsession" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.resultado_en_ad" Role="resultado_en_ad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsession">
+        <PropertyRef Name="id_session" />
+      </Principal>
+      <Dependent Role="resultado_en_ad">
+        <PropertyRef Name="id_session" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__resultado__id_se__5535A963">
+    <End Type="CarreerDataBaseModel.Tsession" Role="Tsession" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.resultado_en_at" Role="resultado_en_at" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsession">
+        <PropertyRef Name="id_session" />
+      </Principal>
+      <Dependent Role="resultado_en_at">
+        <PropertyRef Name="id_session" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__session__id_usua__5629CD9C">
+    <End Type="CarreerDataBaseModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.session" Role="session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="session">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tsession__id_usu__571DF1D5">
+    <End Type="CarreerDataBaseModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="CarreerDataBaseModel.Tsession" Role="Tsession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Tsession">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

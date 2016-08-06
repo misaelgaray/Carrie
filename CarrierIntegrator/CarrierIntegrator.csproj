@@ -94,11 +94,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -274,11 +282,14 @@
       <DependentUpon>CarrierDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiPregAppController.cs" />
     <Compile Include="Controllers\ApiPreguntasController.cs" />
     <Compile Include="Controllers\ApiRespuestasController.cs" />
     <Compile Include="Controllers\ApisessionsController.cs" />
     <Compile Include="Controllers\ApiUsuariosController.cs" />
     <Compile Include="Controllers\areas_carController.cs" />
+    <Compile Include="Controllers\CarrerasController.cs" />
+    <Compile Include="Controllers\CarrieController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PreguntasController.cs" />
     <Compile Include="Controllers\preguntas_en_adController.cs" />
@@ -287,12 +298,17 @@
     <Compile Include="Controllers\TsessionsController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="database_firewall_rules.cs">
+      <DependentUpon>CarrierDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PreguntasViewModel.cs" />
+    <Compile Include="Models\RespuestasViewModel.cs" />
     <Compile Include="Models\StaticObjects.cs" />
     <Compile Include="Preguntas.cs">
       <DependentUpon>CarrierDB.tt</DependentUpon>
@@ -324,6 +340,18 @@
     <Compile Include="session.cs">
       <DependentUpon>CarrierDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="spConteoArea_Result.cs">
+      <DependentUpon>CarrierDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spForward_tracking_Result.cs">
+      <DependentUpon>CarrierDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spMostrarCarreras_Result.cs">
+      <DependentUpon>CarrierDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spPreguntasSelect_Result.cs">
+      <DependentUpon>CarrierDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>CarrierDB.tt</DependentUpon>
     </Compile>
@@ -331,9 +359,6 @@
       <DependentUpon>CarrierDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>CarrierDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Tsession.cs">
       <DependentUpon>CarrierDB.tt</DependentUpon>
     </Compile>
@@ -355,6 +380,15 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\carrie.png" />
+    <Content Include="Content\img\e.png" />
+    <Content Include="Content\img\logowhite.png" />
+    <Content Include="Content\img\perfil.jpg" />
+    <Content Include="Content\img\Picture1.png" />
+    <Content Include="Content\img\Picture2.png" />
+    <Content Include="Content\img\Picture3.png" />
+    <Content Include="Content\img\Picture4.png" />
+    <Content Include="Content\img\upq.JPG" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -462,6 +496,14 @@
     <Content Include="Views\areas_car\Details.cshtml" />
     <Content Include="Views\areas_car\Edit.cshtml" />
     <Content Include="Views\areas_car\Index.cshtml" />
+    <Content Include="Views\Carreras\Create.cshtml" />
+    <Content Include="Views\Carreras\Delete.cshtml" />
+    <Content Include="Views\Carreras\Details.cshtml" />
+    <Content Include="Views\Carreras\Edit.cshtml" />
+    <Content Include="Views\Carreras\Index.cshtml" />
+    <Content Include="Views\Carreras\TestProc.cshtml" />
+    <Content Include="Views\Shared\_Landing.cshtml" />
+    <Content Include="Views\Carrie\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

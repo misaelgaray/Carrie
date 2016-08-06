@@ -7,12 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CarrierIntegrator;
+using CarrierIntegrator.Services;
+using System.Web.Helpers;
+using System.Web.Http.Cors;
+using CarrierIntegrator.Models;
 
 namespace CarrierIntegrator.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PreguntasController : Controller
     {
         private CarreerDataBaseEntities1 db = new CarreerDataBaseEntities1();
+
+        RespuestasService rs = new RespuestasService();
 
         // GET: Preguntas
         public ActionResult Index()
@@ -20,6 +27,7 @@ namespace CarrierIntegrator.Controllers
             return View(db.Preguntas.ToList());
         }
 
+        [HttpGet]
         public JsonResult Preguntas()
         {
             var emp = db.pregunta_area.Select(e => new
@@ -33,7 +41,15 @@ namespace CarrierIntegrator.Controllers
             return new JsonResult { Data = emp, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public JsonResult PreguntasById(int id)
+        
+        /*public JsonResult TotalRespuestas()
+        {
+            var en = rs.EncadenamientoAdelante(1).ToList();
+            return new JsonResult { Data = en, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }*/
+
+        [HttpGet]
+        public ActionResult PreguntasById(int id)
         {
             var emp = db.pregunta_area.Where(i => i.fk_pregunta == id).Select(e => new
             {
@@ -43,7 +59,7 @@ namespace CarrierIntegrator.Controllers
             }
             ).ToList();
 
-            return new JsonResult { Data = emp, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return Json(emp, JsonRequestBehavior.AllowGet );
         }
 
         // GET: Preguntas/Details/5

@@ -1,0 +1,26 @@
+﻿@model List<spMostrarCarreras_Result>
+
+@{
+    ViewBag.Title = "TestProc";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID Area</th>
+        <th>Id CArrera</th>
+        <th>Area</th>
+        <th>Carrera</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.id_area</td>
+            <td>@item.id_carrera</td>
+            <td>@item.nombre_area</td>
+            <td>@item.nombre_carrera</td>
+        </tr>
+    }
+</table>
+
+<h2>TestProc</h2>
+

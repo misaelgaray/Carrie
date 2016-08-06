@@ -93,3 +93,6 @@ c:\users\misael\documents\visual studio 2015\Projects\CarrierIntegrator\CarrierI
 c:\users\misael\documents\visual studio 2015\Projects\CarrierIntegrator\CarrierIntegrator\obj\Debug\CarrierIntegrator.dll
 c:\users\misael\documents\visual studio 2015\Projects\CarrierIntegrator\CarrierIntegrator\obj\Debug\CarrierIntegrator.pdb
 C:\Users\Misael\documents\visual studio 2015\Projects\CarrierIntegrator\CarrierIntegrator\obj\Debug\CarrierIntegrator.csprojResolveAssemblyReference.cache
+C:\Users\Misael\documents\visual studio 2015\Projects\CarrierIntegrator\CarrierIntegrator\bin\System.Web.Cors.dll
+C:\Users\Misael\documents\visual studio 2015\Projects\CarrierIntegrator\CarrierIntegrator\bin\System.Web.Http.Cors.dll
+C:\Users\Misael\documents\visual studio 2015\Projects\CarrierIntegrator\CarrierIntegrator\bin\System.Web.Http.Cors.xml

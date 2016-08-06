@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="CarreerDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="CarreerDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="areas_car">
     <Key>
       <PropertyRef Name="id_area" />
@@ -80,16 +80,6 @@
     <Property Name="id_usuario" Type="int" />
     <Property Name="fecha_sesion" Type="datetime" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="Tsession">
     <Key>
       <PropertyRef Name="id_session" />
@@ -108,7 +98,25 @@
     <Property Name="correo_usuario" Type="varchar" MaxLength="50" />
     <Property Name="pass_usuario" Type="varchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK__Carreras__fk_are__0519C6AF">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Carreras__fk_are__49C3F6B7">
     <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
     <End Role="Carreras" Type="Self.Carreras" Multiplicity="*" />
     <ReferentialConstraint>
@@ -120,7 +128,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__pregunta___fk_ar__1273C1CD">
+  <Association Name="FK__pregunta___fk_ar__4BAC3F29">
     <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
     <End Role="pregunta_area" Type="Self.pregunta_area" Multiplicity="*" />
     <ReferentialConstraint>
@@ -132,7 +140,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__pregunta___fk_pr__117F9D94">
+  <Association Name="FK__pregunta___fk_pr__4AB81AF0">
     <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="0..1" />
     <End Role="pregunta_area" Type="Self.pregunta_area" Multiplicity="*" />
     <ReferentialConstraint>
@@ -144,7 +152,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__preguntas__fk_pr__173876EA">
+  <Association Name="FK__preguntas__fk_pr__4CA06362">
     <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="0..1" />
     <End Role="preguntas_en_ad" Type="Self.preguntas_en_ad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -156,7 +164,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__preguntas__fk_pr__21B6055D">
+  <Association Name="FK__preguntas__fk_pr__4F7CD00D">
     <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="0..1" />
     <End Role="preguntas_en_at" Type="Self.preguntas_en_at" Multiplicity="*" />
     <ReferentialConstraint>
@@ -168,7 +176,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__preguntas__fk_us__182C9B23">
+  <Association Name="FK__preguntas__fk_us__4D94879B">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
     <End Role="preguntas_en_ad" Type="Self.preguntas_en_ad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -180,7 +188,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__preguntas__fk_us__22AA2996">
+  <Association Name="FK__preguntas__fk_us__5070F446">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
     <End Role="preguntas_en_at" Type="Self.preguntas_en_at" Multiplicity="*" />
     <ReferentialConstraint>
@@ -192,7 +200,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__preguntas__id_se__3E52440B">
+  <Association Name="FK__preguntas__id_se__4E88ABD4">
     <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
     <End Role="preguntas_en_ad" Type="Self.preguntas_en_ad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -204,7 +212,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__preguntas__id_se__3F466844">
+  <Association Name="FK__preguntas__id_se__5165187F">
     <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
     <End Role="preguntas_en_at" Type="Self.preguntas_en_at" Multiplicity="*" />
     <ReferentialConstraint>
@@ -216,7 +224,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__resultado__fk_ar__1CF15040">
+  <Association Name="FK__resultado__fk_ar__52593CB8">
     <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
     <End Role="resultado_en_ad" Type="Self.resultado_en_ad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -228,7 +236,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__resultado__fk_ar__276EDEB3">
+  <Association Name="FK__resultado__fk_ar__5441852A">
     <End Role="areas_car" Type="Self.areas_car" Multiplicity="0..1" />
     <End Role="resultado_en_at" Type="Self.resultado_en_at" Multiplicity="*" />
     <ReferentialConstraint>
@@ -240,19 +248,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__resultado__id_se__403A8C7D">
-    <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
-    <End Role="resultado_en_at" Type="Self.resultado_en_at" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tsession">
-        <PropertyRef Name="id_session" />
-      </Principal>
-      <Dependent Role="resultado_en_at">
-        <PropertyRef Name="id_session" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__resultado__id_se__412EB0B6">
+  <Association Name="FK__resultado__id_se__534D60F1">
     <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
     <End Role="resultado_en_ad" Type="Self.resultado_en_ad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -264,7 +260,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__session__id_usua__38996AB5">
+  <Association Name="FK__resultado__id_se__5535A963">
+    <End Role="Tsession" Type="Self.Tsession" Multiplicity="0..1" />
+    <End Role="resultado_en_at" Type="Self.resultado_en_at" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tsession">
+        <PropertyRef Name="id_session" />
+      </Principal>
+      <Dependent Role="resultado_en_at">
+        <PropertyRef Name="id_session" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__session__id_usua__5629CD9C">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
     <End Role="session" Type="Self.session" Multiplicity="*" />
     <ReferentialConstraint>
@@ -276,7 +284,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Tsession__id_usu__3D5E1FD2">
+  <Association Name="FK__Tsession__id_usu__571DF1D5">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
     <End Role="Tsession" Type="Self.Tsession" Multiplicity="*" />
     <ReferentialConstraint>
@@ -288,37 +296,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  <Function Name="spConteoArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUsuario" Type="int" Mode="In" />
+    <Parameter Name="respuesta" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  <Function Name="spForward_tracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUsuario" Type="int" Mode="In" />
+    <Parameter Name="respuesta" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
+  <Function Name="spMostrarCarreras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idArea" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
+  <Function Name="spPreguntasSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="all" Type="bit" Mode="In" />
+    <Parameter Name="area" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
+  <Function Name="spRespuesta_Ad_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idArea" Type="int" Mode="In" />
+    <Parameter Name="cantidadSi" Type="int" Mode="In" />
+    <Parameter Name="cantidadNo" Type="int" Mode="In" />
+    <Parameter Name="idSession" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  <Function Name="spRetroalimientacionCarreras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idArea" Type="int" Mode="In" />
+    <Parameter Name="idCarrera" Type="int" Mode="In" />
+    <Parameter Name="retro" Type="nvarchar" Mode="InOut" />
   </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="CarreerDataBaseModelStoreContainer">
     <EntitySet Name="areas_car" EntityType="Self.areas_car" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Carreras" EntityType="Self.Carreras" Schema="dbo" store:Type="Tables" />
@@ -329,66 +332,75 @@
     <EntitySet Name="resultado_en_ad" EntityType="Self.resultado_en_ad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="resultado_en_at" EntityType="Self.resultado_en_at" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="session" EntityType="Self.session" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tsession" EntityType="Self.Tsession" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Carreras__fk_are__0519C6AF" Association="Self.FK__Carreras__fk_are__0519C6AF">
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Carreras__fk_are__49C3F6B7" Association="Self.FK__Carreras__fk_are__49C3F6B7">
       <End Role="areas_car" EntitySet="areas_car" />
       <End Role="Carreras" EntitySet="Carreras" />
     </AssociationSet>
-    <AssociationSet Name="FK__pregunta___fk_ar__1273C1CD" Association="Self.FK__pregunta___fk_ar__1273C1CD">
+    <AssociationSet Name="FK__pregunta___fk_ar__4BAC3F29" Association="Self.FK__pregunta___fk_ar__4BAC3F29">
       <End Role="areas_car" EntitySet="areas_car" />
       <End Role="pregunta_area" EntitySet="pregunta_area" />
     </AssociationSet>
-    <AssociationSet Name="FK__pregunta___fk_pr__117F9D94" Association="Self.FK__pregunta___fk_pr__117F9D94">
+    <AssociationSet Name="FK__pregunta___fk_pr__4AB81AF0" Association="Self.FK__pregunta___fk_pr__4AB81AF0">
       <End Role="Preguntas" EntitySet="Preguntas" />
       <End Role="pregunta_area" EntitySet="pregunta_area" />
     </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_pr__173876EA" Association="Self.FK__preguntas__fk_pr__173876EA">
+    <AssociationSet Name="FK__preguntas__fk_pr__4CA06362" Association="Self.FK__preguntas__fk_pr__4CA06362">
       <End Role="Preguntas" EntitySet="Preguntas" />
       <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
     </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_pr__21B6055D" Association="Self.FK__preguntas__fk_pr__21B6055D">
+    <AssociationSet Name="FK__preguntas__fk_pr__4F7CD00D" Association="Self.FK__preguntas__fk_pr__4F7CD00D">
       <End Role="Preguntas" EntitySet="Preguntas" />
       <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
     </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_us__182C9B23" Association="Self.FK__preguntas__fk_us__182C9B23">
+    <AssociationSet Name="FK__preguntas__fk_us__4D94879B" Association="Self.FK__preguntas__fk_us__4D94879B">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
     </AssociationSet>
-    <AssociationSet Name="FK__preguntas__fk_us__22AA2996" Association="Self.FK__preguntas__fk_us__22AA2996">
+    <AssociationSet Name="FK__preguntas__fk_us__5070F446" Association="Self.FK__preguntas__fk_us__5070F446">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
     </AssociationSet>
-    <AssociationSet Name="FK__preguntas__id_se__3E52440B" Association="Self.FK__preguntas__id_se__3E52440B">
+    <AssociationSet Name="FK__preguntas__id_se__4E88ABD4" Association="Self.FK__preguntas__id_se__4E88ABD4">
       <End Role="Tsession" EntitySet="Tsession" />
       <End Role="preguntas_en_ad" EntitySet="preguntas_en_ad" />
     </AssociationSet>
-    <AssociationSet Name="FK__preguntas__id_se__3F466844" Association="Self.FK__preguntas__id_se__3F466844">
+    <AssociationSet Name="FK__preguntas__id_se__5165187F" Association="Self.FK__preguntas__id_se__5165187F">
       <End Role="Tsession" EntitySet="Tsession" />
       <End Role="preguntas_en_at" EntitySet="preguntas_en_at" />
     </AssociationSet>
-    <AssociationSet Name="FK__resultado__fk_ar__1CF15040" Association="Self.FK__resultado__fk_ar__1CF15040">
+    <AssociationSet Name="FK__resultado__fk_ar__52593CB8" Association="Self.FK__resultado__fk_ar__52593CB8">
       <End Role="areas_car" EntitySet="areas_car" />
       <End Role="resultado_en_ad" EntitySet="resultado_en_ad" />
     </AssociationSet>
-    <AssociationSet Name="FK__resultado__fk_ar__276EDEB3" Association="Self.FK__resultado__fk_ar__276EDEB3">
+    <AssociationSet Name="FK__resultado__fk_ar__5441852A" Association="Self.FK__resultado__fk_ar__5441852A">
       <End Role="areas_car" EntitySet="areas_car" />
       <End Role="resultado_en_at" EntitySet="resultado_en_at" />
     </AssociationSet>
-    <AssociationSet Name="FK__resultado__id_se__403A8C7D" Association="Self.FK__resultado__id_se__403A8C7D">
-      <End Role="Tsession" EntitySet="Tsession" />
-      <End Role="resultado_en_at" EntitySet="resultado_en_at" />
-    </AssociationSet>
-    <AssociationSet Name="FK__resultado__id_se__412EB0B6" Association="Self.FK__resultado__id_se__412EB0B6">
+    <AssociationSet Name="FK__resultado__id_se__534D60F1" Association="Self.FK__resultado__id_se__534D60F1">
       <End Role="Tsession" EntitySet="Tsession" />
       <End Role="resultado_en_ad" EntitySet="resultado_en_ad" />
     </AssociationSet>
-    <AssociationSet Name="FK__session__id_usua__38996AB5" Association="Self.FK__session__id_usua__38996AB5">
+    <AssociationSet Name="FK__resultado__id_se__5535A963" Association="Self.FK__resultado__id_se__5535A963">
+      <End Role="Tsession" EntitySet="Tsession" />
+      <End Role="resultado_en_at" EntitySet="resultado_en_at" />
+    </AssociationSet>
+    <AssociationSet Name="FK__session__id_usua__5629CD9C" Association="Self.FK__session__id_usua__5629CD9C">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="session" EntitySet="session" />
     </AssociationSet>
-    <AssociationSet Name="FK__Tsession__id_usu__3D5E1FD2" Association="Self.FK__Tsession__id_usu__3D5E1FD2">
+    <AssociationSet Name="FK__Tsession__id_usu__571DF1D5" Association="Self.FK__Tsession__id_usu__571DF1D5">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Tsession" EntitySet="Tsession" />
     </AssociationSet>

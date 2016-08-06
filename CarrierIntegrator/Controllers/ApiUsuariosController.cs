@@ -10,9 +10,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CarrierIntegrator;
 using CarrierIntegrator.Models;
+using System.Web.Http.Cors;
 
 namespace CarrierIntegrator.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ApiUsuariosController : ApiController
     {
         private CarreerDataBaseEntities1 db = new CarreerDataBaseEntities1();
@@ -31,10 +33,10 @@ namespace CarrierIntegrator.Controllers
 
         // GET: api/ApiUsuarios/5
        
-        public IHttpActionResult GetUsuarios(string id_pregunta, string respuesta, string token)
+        public IHttpActionResult GetUsuarios(string id, string respuesta, string token)
         {
 
-            Usuarios new_user = StaticObjects.NewUsuarios(id_pregunta, respuesta, token);
+            Usuarios new_user = StaticObjects.NewUsuarios(id, respuesta, token);
             db.Usuarios.Add(new_user);
 
             try

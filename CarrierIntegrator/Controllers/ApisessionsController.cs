@@ -12,9 +12,11 @@ using CarrierIntegrator;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using CarrierIntegrator.Models;
+using System.Web.Http.Cors;
 
 namespace CarrierIntegrator.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ApisessionsController : ApiController
     {
         private CarreerDataBaseEntities1 db = new CarreerDataBaseEntities1();
@@ -42,9 +44,9 @@ namespace CarrierIntegrator.Controllers
         }
 
         // Get: api/Apisession/user/pass
-        public JsonResult GetUserSession(string user, string pass)
+        public JsonResult GetUserSession(string id, string respuesta)
         {
-            var login = (from log in db.Usuarios where log.correo_usuario == user && log.pass_usuario == pass select log).Single();
+            var login = (from log in db.Usuarios where log.correo_usuario == id && log.pass_usuario == respuesta select log).Single();
 
             if(login == null)
             {

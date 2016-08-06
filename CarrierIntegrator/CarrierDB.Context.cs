@@ -36,9 +36,9 @@ namespace CarrierIntegrator
         public virtual DbSet<resultado_en_ad> resultado_en_ad { get; set; }
         public virtual DbSet<resultado_en_at> resultado_en_at { get; set; }
         public virtual DbSet<session> session { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tsession> Tsession { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -141,6 +141,88 @@ namespace CarrierIntegrator
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<spConteoArea_Result> spConteoArea(Nullable<int> idUsuario, string respuesta)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("idUsuario", idUsuario) :
+                new ObjectParameter("idUsuario", typeof(int));
+    
+            var respuestaParameter = respuesta != null ?
+                new ObjectParameter("respuesta", respuesta) :
+                new ObjectParameter("respuesta", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConteoArea_Result>("spConteoArea", idUsuarioParameter, respuestaParameter);
+        }
+    
+        public virtual ObjectResult<spMostrarCarreras_Result> spMostrarCarreras(Nullable<int> idArea)
+        {
+            var idAreaParameter = idArea.HasValue ?
+                new ObjectParameter("idArea", idArea) :
+                new ObjectParameter("idArea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMostrarCarreras_Result>("spMostrarCarreras", idAreaParameter);
+        }
+    
+        public virtual ObjectResult<spPreguntasSelect_Result> spPreguntasSelect(Nullable<bool> all, Nullable<int> area)
+        {
+            var allParameter = all.HasValue ?
+                new ObjectParameter("all", all) :
+                new ObjectParameter("all", typeof(bool));
+    
+            var areaParameter = area.HasValue ?
+                new ObjectParameter("area", area) :
+                new ObjectParameter("area", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spPreguntasSelect_Result>("spPreguntasSelect", allParameter, areaParameter);
+        }
+    
+        public virtual int spRespuesta_Ad_Insert(Nullable<int> idArea, Nullable<int> cantidadSi, Nullable<int> cantidadNo, Nullable<int> idSession)
+        {
+            var idAreaParameter = idArea.HasValue ?
+                new ObjectParameter("idArea", idArea) :
+                new ObjectParameter("idArea", typeof(int));
+    
+            var cantidadSiParameter = cantidadSi.HasValue ?
+                new ObjectParameter("cantidadSi", cantidadSi) :
+                new ObjectParameter("cantidadSi", typeof(int));
+    
+            var cantidadNoParameter = cantidadNo.HasValue ?
+                new ObjectParameter("cantidadNo", cantidadNo) :
+                new ObjectParameter("cantidadNo", typeof(int));
+    
+            var idSessionParameter = idSession.HasValue ?
+                new ObjectParameter("idSession", idSession) :
+                new ObjectParameter("idSession", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRespuesta_Ad_Insert", idAreaParameter, cantidadSiParameter, cantidadNoParameter, idSessionParameter);
+        }
+    
+        public virtual ObjectResult<string> spRetroalimientacionCarreras(Nullable<int> idArea, Nullable<int> idCarrera, ObjectParameter retro)
+        {
+            var idAreaParameter = idArea.HasValue ?
+                new ObjectParameter("idArea", idArea) :
+                new ObjectParameter("idArea", typeof(int));
+    
+            var idCarreraParameter = idCarrera.HasValue ?
+                new ObjectParameter("idCarrera", idCarrera) :
+                new ObjectParameter("idCarrera", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spRetroalimientacionCarreras", idAreaParameter, idCarreraParameter, retro);
+        }
+    
+        public virtual ObjectResult<spForward_tracking_Result> spForward_tracking(Nullable<int> idUsuario, string respuesta)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("idUsuario", idUsuario) :
+                new ObjectParameter("idUsuario", typeof(int));
+    
+            var respuestaParameter = respuesta != null ?
+                new ObjectParameter("respuesta", respuesta) :
+                new ObjectParameter("respuesta", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spForward_tracking_Result>("spForward_tracking", idUsuarioParameter, respuestaParameter);
         }
     }
 }

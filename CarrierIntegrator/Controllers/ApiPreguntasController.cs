@@ -5,15 +5,20 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CarrierIntegrator;
 using System.Web.Http.Results;
 using System.Web.Mvc;
+using System.Web.Http.Cors;
+using System.Web.Helpers;
+using CarrierIntegrator.Models;
 
 namespace CarrierIntegrator.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ApiPreguntasController : ApiController
     {
         private CarreerDataBaseEntities1 db = new CarreerDataBaseEntities1();
@@ -21,64 +26,39 @@ namespace CarrierIntegrator.Controllers
         // GET: api/ApiPreguntas
         public JsonResult GetPreguntas()
         {
-            var emp = db.Preguntas.Select(e => new
+            var emp = db.pregunta_area.Select(e => new
             {
-                id = e.id_pregunta,
-                pregunta = e.pregunta
+                id_pregunta = e.fk_pregunta,
+                pregunta = e.Preguntas.pregunta,
+                id_area = e.fk_area,
+                area = e.areas_car.nombre_area
             }
             ).ToList();
+
+           
+            return new JsonResult{Data = emp, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
+        
+        public JsonResult GetPreguntas(int id)
+        {
+            var emp = db.pregunta_area.Where(i => i.fk_pregunta == id).Select(e => new
+            {
+                id_pregunta = e.fk_pregunta,
+                pregunta = e.Preguntas.pregunta,
+                id_area = e.fk_area,
+                area = e.areas_car.nombre_area
+            }
+           ).ToList();
+
 
             return new JsonResult { Data = emp, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+
+
         
-        // GET: api/ApiPreguntas/5
-        [ResponseType(typeof(Preguntas))]
-        public IHttpActionResult GetPreguntas(int id)
-        {
-            Preguntas preguntas = db.Preguntas.Find(id);
-            if (preguntas == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(preguntas);
-        }
-
-        // PUT: api/ApiPreguntas/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutPreguntas(int id, Preguntas preguntas)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != preguntas.id_pregunta)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(preguntas).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PreguntasExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
 
         // POST: api/ApiPreguntas
         [ResponseType(typeof(Preguntas))]
