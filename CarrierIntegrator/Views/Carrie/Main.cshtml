@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Titulo = "Seleccion Modalidad";
+    Layout = "~/Views/Shared/_Landing.cshtml";
+}
+
+@if( TempData["login"] != null)
+{
+    if (TempData["login"] == "success")
+    {
+        <h4>Exito</h4>
+    }
+}
+@section  preguntas{
+    <div class="row" ng-app>
+    <div class="col-md-6">
+        <div class="thumbnail">
+            <img width="40%" height="40%" src="~/Content/img/birrete.png" alt="...">
+            <div class="caption">
+                <h3>Se que estudiar</h3>
+                <p>Tengo clara la carrera que deseo estudiar y quiero verificar mis aptidutes</p>
+                <div class="form-group">
+                    <label class="col-md-3">Area</label>
+                    <div class="col-md-9">
+                        <select class="form-control" id="area" ng-model="mod.area" onchange="BuscarCarreras()" onclick="BuscarAreas()">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">Carrera</label>
+                    <div class="col-md-9">
+                        <select class="form-control" id="carrera" ng-model="mod.carrera"></select>
+                    </div>
+                </div>
+                <a href="/Carrie/Back/{{mod.area}}" class="btn btn-lg btn-default" role="button">Start</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="thumbnail">
+            <img width="30%" height="30%" src="~/Content/img/nose.png" alt="...">
+            <div class="caption">
+                <h3>No se que estudiar</h3>
+                <p>Quiero saber cual es la carrera apta para mi</p>
+                <a href="/Carrie/Foward" class="btn btn-lg btn-default" role="button">Start</a>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<script>
+    function BuscarAreas() {
+        $("#area option").remove();
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: '/Carrie/Areas/',
+            async: true,
+            success: function (response) {
+                var options = $("#area");
+                $.each(response, function (i, data) {
+                    //options.append($("<option />").val(data.id_almacen).text(data.nombre_almacen));
+                    options.append("<option value='" + data.id_area + "'>" + data.nombre_area + "</option>");
+
+                });
+
+            },
+            error: function (obj, error, objError) {
+                alert("Error interno: " + objError);
+                console.log(error);
+            }
+        });
+    }
+
+    function BuscarCarreras() {
+        $("#carrera option").remove();
+        var id_area = $("#area").val();
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: '/Carrie/Carreras/'+id_area,
+            async: true,
+            success: function (response) {
+                var options = $("#carrera");
+                $.each(response, function (i, data) {
+                    //options.append($("<option />").val(data.id_almacen).text(data.nombre_almacen));
+                    options.append("<option value='" + data.id_carrera + "'>" + data.nombre_carrera + "</option>");
+
+                });
+            },
+            error: function (obj, error, objError) {
+                alert("Error interno: " + objError);
+                console.log(error);
+            }
+        });
+    }
+</script>
+}
+

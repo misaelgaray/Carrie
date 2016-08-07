@@ -337,6 +337,7 @@
     </Compile>
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\RespuestasService.cs" />
+    <Compile Include="Services\SessionService.cs" />
     <Compile Include="session.cs">
       <DependentUpon>CarrierDB.tt</DependentUpon>
     </Compile>
@@ -380,9 +381,11 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\birrete.png" />
     <Content Include="Content\img\carrie.png" />
     <Content Include="Content\img\e.png" />
     <Content Include="Content\img\logowhite.png" />
+    <Content Include="Content\img\nose.png" />
     <Content Include="Content\img\perfil.jpg" />
     <Content Include="Content\img\Picture1.png" />
     <Content Include="Content\img\Picture2.png" />
@@ -504,6 +507,8 @@
     <Content Include="Views\Carreras\TestProc.cshtml" />
     <Content Include="Views\Shared\_Landing.cshtml" />
     <Content Include="Views\Carrie\Index.cshtml" />
+    <Content Include="Views\Carrie\LogIn.cshtml" />
+    <Content Include="Views\Carrie\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

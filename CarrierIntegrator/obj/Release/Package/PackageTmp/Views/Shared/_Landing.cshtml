@@ -50,7 +50,6 @@ body {
 body {
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -59,8 +58,7 @@ body {
   width: 100%;
   height: 100%; /* For at least Firefox */
   min-height: 100%;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+
 }
 .site-wrapper-inner {
   display: table-cell;
@@ -80,9 +78,17 @@ body {
 /*
  * Header
  */
+.masthead{
+  background: #599C66;
+}
+
 .masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.masthead-brand > small {
+  color: white;
 }
 
 .masthead-nav > li {
@@ -113,7 +119,7 @@ body {
   border-bottom-color: #fff;
 }
 
-@media (min-width: 768px) {
+@@media (min-width: 768px) {
   .masthead-brand {
     float: left;
   }
@@ -129,20 +135,25 @@ body {
 
 .cover {
   padding: 0 20px;
+  color: #fff;
 }
 .cover .btn-lg {
   padding: 10px 20px;
   font-weight: bold;
 }
 
+.cover-heading{
+  padding: 0 20%;
+}
 
 /*
  * Footer
  */
 
 .mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
+  background: #599C66;
+  color: #fff; /* IE8 proofing */
+  opacity: .5;
 }
 
 
@@ -150,7 +161,7 @@ body {
  * Affix and center
  */
 
-@media (min-width: 768px) {
+@@media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
@@ -172,7 +183,7 @@ body {
   }
 }
 
-@media (min-width: 992px) {
+@@media (min-width: 992px) {
   .masthead,
   .mastfoot,
   .cover-container {
@@ -236,21 +247,24 @@ body {
                         <nav>
                             <ul class="nav masthead-nav">
                                 <li><a class="develop" href="#">For Developers</a></li>
-                                <li><a class="develop" href="#">Pricing</a></li>
-                                <li><a class="develop" href="#">How it Works</a></li>
-                                <li><a id="login" class="btn btn-success" href="#">Log In</a></li>
-                                <li><a id="registro" class="btn btn-default" href="#">Register</a></li>
+                                <li><a class="develop" href="#">Results</a></li>
+                                <li><a class="develop" href="#">Profile</a></li>
+                                <li><a class="develop" href="#">@RenderSection("img-profile", required : false)<img class="img-circle" height="50" width="50" src="perfil.jpg"></a></li>
+                                <li><a id="registro" class="btn btn-default" href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
                             </ul>
                         </nav>
                     </div>
                 </div>
 
                 <div class="inner cover">
-                    <h1 class="cover-heading img-responsive"><img src="img/e.png"></img><small><span class="label label-default">BETA</span></small></h1>
-                    <p class="lead"><i>Decision Making Based on Vocational Guidance Using High Artificial Intelligence Level</i></p>
+                    @RenderSection("preguntas-content", required : false);
+                    <!--<h3 class="cover-heading"><i>Es usted ayuda a la caridad en sus tiempos libres de osio suyos de usted para ayudar a los necesitados por caridad propia de usted?</i></h3>
+                    <p class="lead"></p>
                     <p class="lead">
-                        <a href="#" class="btn btn-lg btn-default">Start</a>
-                    </p>
+                        <a href="#" class="btn btn-lg btn-success">Si</a>
+                        <a href="#" class="btn btn-lg btn-warning">No se</a>
+                        <a href="#" class="btn btn-lg btn-danger">No</a>
+                    </p>-->
                 </div>
 
                 <div class="mastfoot">
