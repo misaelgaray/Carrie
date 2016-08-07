@@ -509,6 +509,7 @@
     <Content Include="Views\Carrie\Index.cshtml" />
     <Content Include="Views\Carrie\LogIn.cshtml" />
     <Content Include="Views\Carrie\Main.cshtml" />
+    <Content Include="Views\Carrie\Foward.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Titulo = "No se que estudiar";
+    Layout = "~/Views/Shared/_Landing.cshtml";
+}
+
+@section preguntas{
+
+
+<input id="usersession" type="text" value="@ViewBag.session" hidden/>
+
+<!--APP BODY-->
+    
+    <div class="container">
+        <div id="pregunta-content" class="well text-center">
+            
+            <h4></h4>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"><a href="#" id="b-si" class="btn btn-success col-md-12" onclick="siguientePregunta('SI')">Si</a></div>
+            <div class="col-md-4"><a href="#" id="b-nose" class="btn btn-warning col-md-12" onclick="siguientePregunta('NO SE')">No Se</a></div>
+            <div class="col-md-4"><a href="#" id="b-no" class="btn btn-danger col-md-12" onclick="siguientePregunta('NO')">No</a></div>
+        </div>
+    </div>
+
+
+
+    
+<script type="text/javascript">
+
+    var contador = 1;
+    
+    console.log(usersession);
+    
+   /* $(document).ready(function () {
+        primeraPregunta();
+    });*/
+    
+
+     function primeraPregunta()
+    {
+         
+        $("#pregunta-content h4").remove();
+
+                $.ajax({
+
+            type: "GET",
+            dataType: 'json',
+            url: 'http://carrierintegrator.azurewebsites.net/api/ApiPreguntas/'+contador,
+            async: true,
+            success: function (response) {
+               //alert("Exito");
+                $("#pregunta-content").append("<h4>" + contador + ".- " + response.Data[0].pregunta + "?</h4>");
+                console.log(response);
+            },
+            error: function (obj, error, objError) {
+                //alert("Error interno: " + objError);
+
+            }
+        });
+
+    }
+
+		 function siguientePregunta(respuesta)
+     {
+		     if (contador > 80) {
+		         window.location.replace("/Carrie/ResultsEA/");
+		     }
+		     var usersession = $("#usersession").val();
+		     console.log("resp: "+respuesta+" preg:"+contador+" session: "+usersession);
+		 
+		     respuestaPregunta(contador, respuesta, usersession);
+
+		     $("#pregunta-content h4").remove();
+
+        
+                $.ajax({
+
+            type: "GET",
+            dataType: 'json',
+            url: 'http://carrierintegrator.azurewebsites.net/api/ApiPreguntas/'+contador,
+            async: true,
+            success: function (response) {
+               //alert("Exito");
+                $("#pregunta-content").append("<h4>"+response.Data[0].pregunta+"?</h4>");
+                console.log(response);
+            },
+            error: function (obj, error, objError) {
+               // alert("Error interno: " + objError);
+
+            }
+        });
+
+                contador++;
+    }
+
+    function respuestaPregunta(pregunta, respuesta, sesion)
+    {
+
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: 'http://carrierintegrator.azurewebsites.net/api/ApiRespuestas/'+pregunta+'/'+respuesta+'/'+sesion,
+            async: true,
+            success: function (response) {
+
+            },
+            error: function (obj, error, objError) {
+                //alert("Error interno: " + objError);
+
+            }
+        });
+    }
+
+    
+</script>
+}
+

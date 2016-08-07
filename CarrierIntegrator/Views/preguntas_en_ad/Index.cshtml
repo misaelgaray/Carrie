@@ -26,7 +26,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderByDescending(i=>i.id_respuesta)) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.respuesta)
@@ -41,9 +41,7 @@
             @Html.DisplayFor(modelItem => item.Tsession.id_session)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_respuesta }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_respuesta }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_respuesta })
+            
         </td>
     </tr>
 }

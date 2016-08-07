@@ -17,11 +17,13 @@ namespace CarrierIntegrator.Controllers
             return View();
         }
 
+        /*Renderizar Login*/
         public ActionResult LogIn()
         {
             return View();
         }
 
+        /*PETICIONES AJAX*/
         [HttpGet]
         public ActionResult Areas()
         {
@@ -34,6 +36,7 @@ namespace CarrierIntegrator.Controllers
             return Json(carreras, JsonRequestBehavior.AllowGet);
         }
 
+        /*PETICIONES AJAX*/
         [HttpGet]
         public ActionResult Carreras(int id)
         {
@@ -46,6 +49,7 @@ namespace CarrierIntegrator.Controllers
             return Json(carreras, JsonRequestBehavior.AllowGet);
         }
 
+        /*VALIDAR INICIO SESINO*/
         [HttpPost]
         public ActionResult LogIn(string email, string pass)
         {
@@ -68,25 +72,62 @@ namespace CarrierIntegrator.Controllers
             return RedirectToAction("LogIn");
         }
 
+        /*SECCION SE O NO SE QUE ESTUDIAR*/
         public ActionResult Main()
         {
-            int usersession = 0;
-            if (Session["usersession"] != null)
+            if (Session["usersession"] == null)
             {
-                usersession = Convert.ToInt32(Session["usersession"]);
+                TempData["login"] = "session";
+                return RedirectToAction("LogIn");
             }
-
+            int usersession = 0;
+            usersession = Convert.ToInt32(Session["usersession"]);
             return View();
         }
 
+
+        /*PREGUTNAS ENCADENAMIENTO HACIA ATRAS*/
         public ActionResult Back(int id)
         {
             return View();
         }
 
+        /*PREGUTNAs ENCADENAMIENTO HACIA ADELANTE*/
         public ActionResult Foward()
         {
+            if(Session["usersession"] == null)
+            {
+                TempData["login"] = "session";
+                return RedirectToAction("LogIn");
+            }
+
+            ViewBag.session = Session["usersession"];
             return View();
+        }
+
+        /*CIERRE de VARIABLE DE SESSION*/
+        public ActionResult LogOut()
+        {
+            if (Session["usersession"] == null)
+            {
+                TempData["login"] = "session";
+                return RedirectToAction("LogIn");
+            }
+
+            Session["usersession"] = null;
+            return RedirectToAction("LogIn");
+        }
+
+        /*RESULTADOS DE ENCADENAMIENTO HACIA ADELANTE*/
+        public ActionResult ResultsEA()
+        {
+            if (Session["usersession"] == null)
+            {
+                TempData["login"] = "session";
+                return RedirectToAction("LogIn");
+            }
+
+            return Index();
         }
     }
 }
