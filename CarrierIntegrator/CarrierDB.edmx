@@ -36,6 +36,7 @@
           </Key>
           <Property Name="id_pregunta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pregunta" Type="varchar" MaxLength="8000" />
+          <Property Name="id_carrera" Type="int" />
         </EntityType>
         <EntityType Name="preguntas_en_ad">
           <Key>
@@ -301,8 +302,26 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_preguntas_carreras">
+          <End Role="Carreras" Type="Self.Carreras" Multiplicity="0..1" />
+          <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carreras">
+              <PropertyRef Name="id_carrera" />
+            </Principal>
+            <Dependent Role="Preguntas">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spBack_Tracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSession" Type="int" Mode="In" />
+          <Parameter Name="idArea" Type="int" Mode="In" />
+          <Parameter Name="respuesta" Type="nvarchar" Mode="In" />
+          <Parameter Name="idCarrera" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConteoArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idUsuario" Type="int" Mode="In" />
+          <Parameter Name="idSession" Type="int" Mode="In" />
           <Parameter Name="respuesta" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="spForward_tracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -325,7 +344,6 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
         <Function Name="spRetroalimientacionCarreras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idArea" Type="int" Mode="In" />
           <Parameter Name="idCarrera" Type="int" Mode="In" />
-          <Parameter Name="retro" Type="nvarchar" Mode="InOut" />
         </Function>
         <EntityContainer Name="CarreerDataBaseModelStoreContainer">
           <EntitySet Name="areas_car" EntityType="Self.areas_car" Schema="dbo" store:Type="Tables" />
@@ -409,6 +427,10 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Tsession" EntitySet="Tsession" />
           </AssociationSet>
+          <AssociationSet Name="fk_preguntas_carreras" Association="Self.fk_preguntas_carreras">
+            <End Role="Carreras" EntitySet="Carreras" />
+            <End Role="Preguntas" EntitySet="Preguntas" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -446,7 +468,7 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="spConteoArea" ReturnType="Collection(CarreerDataBaseModel.spConteoArea_Result)">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="idSession" Mode="In" Type="Int32" />
             <Parameter Name="respuesta" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spMostrarCarreras" ReturnType="Collection(CarreerDataBaseModel.spMostrarCarreras_Result)">
@@ -465,7 +487,6 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
           <FunctionImport Name="spRetroalimientacionCarreras" ReturnType="Collection(String)">
             <Parameter Name="idArea" Mode="In" Type="Int32" />
             <Parameter Name="idCarrera" Mode="In" Type="Int32" />
-            <Parameter Name="retro" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spForward_tracking" ReturnType="Collection(CarreerDataBaseModel.spForward_tracking_Result)">
             <Parameter Name="idUsuario" Mode="In" Type="Int32" />
@@ -543,6 +564,16 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Tsession" EntitySet="Tsession" />
           </AssociationSet>
+          <AssociationSet Name="fk_preguntas_carreras" Association="CarreerDataBaseModel.fk_preguntas_carreras">
+            <End Role="Carreras" EntitySet="Carreras" />
+            <End Role="Preguntas" EntitySet="Preguntas" />
+          </AssociationSet>
+          <FunctionImport Name="spBack_Tracking" ReturnType="Collection(CarreerDataBaseModel.spBack_Tracking_Result)">
+            <Parameter Name="idSession" Mode="In" Type="Int32" />
+            <Parameter Name="idArea" Mode="In" Type="Int32" />
+            <Parameter Name="respuesta" Mode="In" Type="String" />
+            <Parameter Name="idCarrera" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -603,6 +634,7 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
           <Property Name="nombre_carrera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="descripcion_carrera" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="areas_car" Relationship="CarreerDataBaseModel.FK__Carreras__fk_are__49C3F6B7" FromRole="Carreras" ToRole="areas_car" />
+          <NavigationProperty Name="Preguntas" Relationship="CarreerDataBaseModel.fk_preguntas_carreras" FromRole="Carreras" ToRole="Preguntas" />
         </EntityType>
         <EntityType Name="pregunta_area">
           <Key>
@@ -623,6 +655,8 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
           <NavigationProperty Name="pregunta_area" Relationship="CarreerDataBaseModel.FK__pregunta___fk_pr__4AB81AF0" FromRole="Preguntas" ToRole="pregunta_area" />
           <NavigationProperty Name="preguntas_en_ad" Relationship="CarreerDataBaseModel.FK__preguntas__fk_pr__4CA06362" FromRole="Preguntas" ToRole="preguntas_en_ad" />
           <NavigationProperty Name="preguntas_en_at" Relationship="CarreerDataBaseModel.FK__preguntas__fk_pr__4F7CD00D" FromRole="Preguntas" ToRole="preguntas_en_at" />
+          <Property Name="id_carrera" Type="Int32" />
+          <NavigationProperty Name="Carreras" Relationship="CarreerDataBaseModel.fk_preguntas_carreras" FromRole="Preguntas" ToRole="Carreras" />
         </EntityType>
         <EntityType Name="preguntas_en_ad">
           <Key>
@@ -906,6 +940,23 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_preguntas_carreras">
+          <End Type="CarreerDataBaseModel.Carreras" Role="Carreras" Multiplicity="0..1" />
+          <End Type="CarreerDataBaseModel.Preguntas" Role="Preguntas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carreras">
+              <PropertyRef Name="id_carrera" />
+            </Principal>
+            <Dependent Role="Preguntas">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spBack_Tracking_Result">
+          <Property Type="Int32" Name="valueMax" Nullable="true" />
+          <Property Type="Int32" Name="idCarrera" Nullable="true" />
+          <Property Type="String" Name="Porcentaje" Nullable="true" MaxLength="12" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -988,6 +1039,7 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
           <EntitySetMapping Name="Preguntas">
             <EntityTypeMapping TypeName="CarreerDataBaseModel.Preguntas">
               <MappingFragment StoreEntitySet="Preguntas">
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
                 <ScalarProperty Name="pregunta" ColumnName="pregunta" />
                 <ScalarProperty Name="id_pregunta" ColumnName="id_pregunta" />
               </MappingFragment>
@@ -1078,6 +1130,15 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spBack_Tracking" FunctionName="CarreerDataBaseModel.Store.spBack_Tracking">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarreerDataBaseModel.spBack_Tracking_Result">
+                <ScalarProperty Name="valueMax" ColumnName="valueMax" />
+                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -31,6 +31,7 @@
     </Key>
     <Property Name="id_pregunta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="pregunta" Type="varchar" MaxLength="8000" />
+    <Property Name="id_carrera" Type="int" />
   </EntityType>
   <EntityType Name="preguntas_en_ad">
     <Key>
@@ -296,8 +297,26 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_preguntas_carreras">
+    <End Role="Carreras" Type="Self.Carreras" Multiplicity="0..1" />
+    <End Role="Preguntas" Type="Self.Preguntas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carreras">
+        <PropertyRef Name="id_carrera" />
+      </Principal>
+      <Dependent Role="Preguntas">
+        <PropertyRef Name="id_carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="spBack_Tracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSession" Type="int" Mode="In" />
+    <Parameter Name="idArea" Type="int" Mode="In" />
+    <Parameter Name="respuesta" Type="nvarchar" Mode="In" />
+    <Parameter Name="idCarrera" Type="int" Mode="In" />
+  </Function>
   <Function Name="spConteoArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="idUsuario" Type="int" Mode="In" />
+    <Parameter Name="idSession" Type="int" Mode="In" />
     <Parameter Name="respuesta" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="spForward_tracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -320,7 +339,6 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
   <Function Name="spRetroalimientacionCarreras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idArea" Type="int" Mode="In" />
     <Parameter Name="idCarrera" Type="int" Mode="In" />
-    <Parameter Name="retro" Type="nvarchar" Mode="InOut" />
   </Function>
   <EntityContainer Name="CarreerDataBaseModelStoreContainer">
     <EntitySet Name="areas_car" EntityType="Self.areas_car" Schema="dbo" store:Type="Tables" />
@@ -403,6 +421,10 @@ warning 6002: The table/view 'CarreerDataBase.sys.database_firewall_rules' does 
     <AssociationSet Name="FK__Tsession__id_usu__571DF1D5" Association="Self.FK__Tsession__id_usu__571DF1D5">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Tsession" EntitySet="Tsession" />
+    </AssociationSet>
+    <AssociationSet Name="fk_preguntas_carreras" Association="Self.fk_preguntas_carreras">
+      <End Role="Carreras" EntitySet="Carreras" />
+      <End Role="Preguntas" EntitySet="Preguntas" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

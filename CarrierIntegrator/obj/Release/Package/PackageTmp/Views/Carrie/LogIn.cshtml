@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>LogIn - </title>
 
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
@@ -273,49 +273,67 @@
                 </div>
 
                 <div class="inner cover">
-                    <h1 class="cover-heading img-responsive"><img height="30%" src="~/Content/img/e.png"></img></h1>
-                    <p class="lead">
-                        <div id="tab" class="container">
+    <h1 class="cover-heading img-responsive"><img height="30%" src="~/Content/img/e.png"></img></h1>
+    <p class="lead">
+        <div id="tab" class="container">
 
 
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#Login" aria-controls="home" role="tab" data-toggle="tab">LogIn</a></li>
-                                <li role="presentation"><a href="#register" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
-                            </ul>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#Login" aria-controls="home" role="tab" data-toggle="tab">LogIn</a></li>
+                <li role="presentation"><a href="#register" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+            </ul>
 
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="Login">
-                                    <br>
-                                    <form class="form col-md-12 center-block">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="Login">
+                    <br>
+                    @using (Html.BeginForm("LogIn", "Carrie"))
+                    {
+                        <div class="form-group">
+                            <input class="form-control" type="email" id="email" name="email" placeholder="Enter Email" required />
+                        </div>
                                         <div class="form-group">
-                                            <input class="form-control" type="email" id="email" name="email" placeholder="Enter Email" />
+                                            <input class="form-control" type="password" id="pass" name="pass" placeholder="Enter Password" required />
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" type="password" id="pass" name="pass" placeholder="Enter Password" />
+
+                                            <input type="submit" class="btn btn-default" value="LogIn" />
+                                            @if (TempData["login"] != null)
+                                            {
+                                                if (TempData["login"] == "denied")
+                                                {
+                                                    <span class="label label-danger">Usuario o Contrasena Incorrectos</span>
+                                                }
+                                                else if (TempData["login"] == "void")
+                                                {
+                                                    <span class="label label-danger">Introduzca Datos</span>
+                                                }
+                                                else if (TempData["login"] == "session")
+                                                {
+                                                    <span class="label label-danger">Inicie Sesion</span>
+                                                }
+                                            }
                                         </div>
-                                        <div class="form-group">
-                                            <a href="/LogIn/" class="btn btn-lg btn-default">Log In</a>
-                                        </div>
-                                    </form>
+                    }
                                 </div>
 
                                 <div role="tabpanel" class="tab-pane" id="register">
                                     <br>
-                                    <form class="form col-md-12 center-block">
+                                   @using (Html.BeginForm("LogOn", "Carrie"))
+                                   {
                                         <div class="form-group">
-                                            <input class="form-control" type="text" id="user" name="user" placeholder="Enter Username" />
+                                            <input class="form-control" type="text"  name="userr" placeholder="Enter Username" />
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" type="email" id="email" name="email" placeholder="Enter Email" />
+                                            <input class="form-control" type="email"  name="emailr" placeholder="Enter Email" />
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" type="password" id="pass" name="pass" placeholder="Enter Password" />
+                                            <input class="form-control" type="password"  name="passr" placeholder="Enter Password" />
                                         </div>
-                                        <div class="form-group">
-                                            <a href="/LogIn/" class="btn btn-lg btn-default">Register</a>
+                                        <div class="form-group">                                                          
+                                            <input type="submit" value="Register" class="btn btn-lg btn-default">
                                         </div>
-                                    </form>
+                                   }
                                 </div>
                             </div>
 

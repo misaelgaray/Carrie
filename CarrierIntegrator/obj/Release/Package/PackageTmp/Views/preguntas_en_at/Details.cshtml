@@ -1,0 +1,58 @@
+﻿@model CarrierIntegrator.preguntas_en_at
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>preguntas_en_at</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.respuesta)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.respuesta)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Preguntas.pregunta)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Preguntas.pregunta)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Usuarios.nombre_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Usuarios.nombre_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Tsession.id_session)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Tsession.id_session)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id_respuesta }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

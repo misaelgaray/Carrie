@@ -36,7 +36,24 @@ namespace CarrierIntegrator.Services
             }
         }
 
-        
+
+        public void AddRespuestaEA(int id_pegunta, string respuesta, int token)
+        {
+            Tsession user = db.Tsession.Find(token);
+            preguntas_en_at ead = StaticObjects.Preguntas_En_At(id_pegunta, Convert.ToInt32(user.id_usuario), respuesta, token);
+            db.preguntas_en_at.Add(ead);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
         public int ConteoArea(int? id_usuario, string respuesta)
         {
             var conteo_area = db.spConteoArea(id_usuario, respuesta);

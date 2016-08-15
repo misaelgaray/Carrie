@@ -32,6 +32,7 @@
         <AssociationConnector Association="CarreerDataBaseModel.FK__resultado__id_se__5535A963" />
         <AssociationConnector Association="CarreerDataBaseModel.FK__session__id_usua__5629CD9C" />
         <AssociationConnector Association="CarreerDataBaseModel.FK__Tsession__id_usu__571DF1D5" />
+        <AssociationConnector Association="CarreerDataBaseModel.fk_preguntas_carreras" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

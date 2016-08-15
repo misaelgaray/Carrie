@@ -26,6 +26,17 @@ namespace CarrierIntegrator.Models
             return ad;
         }
 
+        public static preguntas_en_at Preguntas_En_At(int id_pregunta, int id_usuario, string respuesta, int token)
+        {
+            preguntas_en_at ad = new preguntas_en_at();
+            ad.fk_pregunta = id_pregunta;
+            ad.fk_usuario = id_usuario;
+            ad.respuesta = respuesta;
+            ad.id_session = token;
+
+            return ad;
+        }
+
         public static Usuarios NewUsuarios(string nombre, string correo,string pass)
         {
             Usuarios user = new Usuarios();

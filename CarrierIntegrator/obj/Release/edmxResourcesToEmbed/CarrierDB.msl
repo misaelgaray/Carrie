@@ -77,6 +77,7 @@
     <EntitySetMapping Name="Preguntas">
       <EntityTypeMapping TypeName="CarreerDataBaseModel.Preguntas">
         <MappingFragment StoreEntitySet="Preguntas">
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
           <ScalarProperty Name="pregunta" ColumnName="pregunta" />
           <ScalarProperty Name="id_pregunta" ColumnName="id_pregunta" />
         </MappingFragment>
@@ -167,5 +168,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spBack_Tracking" FunctionName="CarreerDataBaseModel.Store.spBack_Tracking">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarreerDataBaseModel.spBack_Tracking_Result">
+          <ScalarProperty Name="valueMax" ColumnName="valueMax" />
+          <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

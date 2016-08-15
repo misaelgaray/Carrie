@@ -143,17 +143,17 @@ namespace CarrierIntegrator
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<spConteoArea_Result> spConteoArea(Nullable<int> idUsuario, string respuesta)
+        public virtual ObjectResult<spConteoArea_Result> spConteoArea(Nullable<int> idSession, string respuesta)
         {
-            var idUsuarioParameter = idUsuario.HasValue ?
-                new ObjectParameter("idUsuario", idUsuario) :
-                new ObjectParameter("idUsuario", typeof(int));
+            var idSessionParameter = idSession.HasValue ?
+                new ObjectParameter("idSession", idSession) :
+                new ObjectParameter("idSession", typeof(int));
     
             var respuestaParameter = respuesta != null ?
                 new ObjectParameter("respuesta", respuesta) :
                 new ObjectParameter("respuesta", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConteoArea_Result>("spConteoArea", idUsuarioParameter, respuestaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConteoArea_Result>("spConteoArea", idSessionParameter, respuestaParameter);
         }
     
         public virtual ObjectResult<spMostrarCarreras_Result> spMostrarCarreras(Nullable<int> idArea)
@@ -199,7 +199,7 @@ namespace CarrierIntegrator
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRespuesta_Ad_Insert", idAreaParameter, cantidadSiParameter, cantidadNoParameter, idSessionParameter);
         }
     
-        public virtual ObjectResult<string> spRetroalimientacionCarreras(Nullable<int> idArea, Nullable<int> idCarrera, ObjectParameter retro)
+        public virtual ObjectResult<string> spRetroalimientacionCarreras(Nullable<int> idArea, Nullable<int> idCarrera)
         {
             var idAreaParameter = idArea.HasValue ?
                 new ObjectParameter("idArea", idArea) :
@@ -209,7 +209,7 @@ namespace CarrierIntegrator
                 new ObjectParameter("idCarrera", idCarrera) :
                 new ObjectParameter("idCarrera", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spRetroalimientacionCarreras", idAreaParameter, idCarreraParameter, retro);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spRetroalimientacionCarreras", idAreaParameter, idCarreraParameter);
         }
     
         public virtual ObjectResult<spForward_tracking_Result> spForward_tracking(Nullable<int> idUsuario, string respuesta)
@@ -223,6 +223,27 @@ namespace CarrierIntegrator
                 new ObjectParameter("respuesta", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spForward_tracking_Result>("spForward_tracking", idUsuarioParameter, respuestaParameter);
+        }
+    
+        public virtual ObjectResult<spBack_Tracking_Result> spBack_Tracking(Nullable<int> idSession, Nullable<int> idArea, string respuesta, Nullable<int> idCarrera)
+        {
+            var idSessionParameter = idSession.HasValue ?
+                new ObjectParameter("idSession", idSession) :
+                new ObjectParameter("idSession", typeof(int));
+    
+            var idAreaParameter = idArea.HasValue ?
+                new ObjectParameter("idArea", idArea) :
+                new ObjectParameter("idArea", typeof(int));
+    
+            var respuestaParameter = respuesta != null ?
+                new ObjectParameter("respuesta", respuesta) :
+                new ObjectParameter("respuesta", typeof(string));
+    
+            var idCarreraParameter = idCarrera.HasValue ?
+                new ObjectParameter("idCarrera", idCarrera) :
+                new ObjectParameter("idCarrera", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spBack_Tracking_Result>("spBack_Tracking", idSessionParameter, idAreaParameter, respuestaParameter, idCarreraParameter);
         }
     }
 }

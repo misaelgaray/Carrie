@@ -15,6 +15,7 @@ using System.Web.Mvc;
 using System.Web.Http.Cors;
 using System.Web.Helpers;
 using CarrierIntegrator.Models;
+using CarrierIntegrator.Services;
 
 namespace CarrierIntegrator.Controllers
 {
@@ -22,6 +23,7 @@ namespace CarrierIntegrator.Controllers
     public class ApiPreguntasController : ApiController
     {
         private CarreerDataBaseEntities1 db = new CarreerDataBaseEntities1();
+        RespuestasService rs = new RespuestasService();
 
         // GET: api/ApiPreguntas
         public JsonResult GetPreguntas()
@@ -56,9 +58,22 @@ namespace CarrierIntegrator.Controllers
             return new JsonResult { Data = emp, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult SendedRequest(int? id, string respuesta, int? token)
+        {
+
+            if (token == null || respuesta == null || id == null)
+            {
+                return BadRequest();
+            }
+            
+           rs.AddRespuestaEA(Convert.ToInt32(id), respuesta, Convert.ToInt32(token));
+            
+
+            return Ok();
+        }
 
 
-        
 
         // POST: api/ApiPreguntas
         [ResponseType(typeof(Preguntas))]

@@ -8,11 +8,27 @@ namespace CarrierIntegrator.Services
 {
     public class SessionService
     {
-        CarreerDataBaseEntities1 db;
+        CarreerDataBaseEntities1 db = new CarreerDataBaseEntities1();
 
-        public SessionService()
+        
+
+        public int LogOn(string user, string mail, string pass)
         {
-            db = new CarreerDataBaseEntities1();
+            int session = 0;
+            Usuarios new_user = StaticObjects.NewUsuarios(user, mail, pass);
+            db.Usuarios.Add(new_user);
+
+            try
+            {
+                db.SaveChanges();
+                session = LogIn(mail, pass);
+            }
+            catch
+            {
+                return session;
+            }
+
+            return session;
         }
 
         public int LogIn(string user, string pass)

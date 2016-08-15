@@ -282,6 +282,7 @@
       <DependentUpon>CarrierDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiBackTrackController.cs" />
     <Compile Include="Controllers\ApiPregAppController.cs" />
     <Compile Include="Controllers\ApiPreguntasController.cs" />
     <Compile Include="Controllers\ApiRespuestasController.cs" />
@@ -290,9 +291,11 @@
     <Compile Include="Controllers\areas_carController.cs" />
     <Compile Include="Controllers\CarrerasController.cs" />
     <Compile Include="Controllers\CarrieController.cs" />
+    <Compile Include="Controllers\EncadenamientosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PreguntasController.cs" />
     <Compile Include="Controllers\preguntas_en_adController.cs" />
+    <Compile Include="Controllers\preguntas_en_atController.cs" />
     <Compile Include="Controllers\pregunta_areaController.cs" />
     <Compile Include="Controllers\sessionsController.cs" />
     <Compile Include="Controllers\TsessionsController.cs" />
@@ -306,6 +309,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BackViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PreguntasViewModel.cs" />
     <Compile Include="Models\RespuestasViewModel.cs" />
@@ -339,6 +343,9 @@
     <Compile Include="Services\RespuestasService.cs" />
     <Compile Include="Services\SessionService.cs" />
     <Compile Include="session.cs">
+      <DependentUpon>CarrierDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spBack_Tracking_Result.cs">
       <DependentUpon>CarrierDB.tt</DependentUpon>
     </Compile>
     <Compile Include="spConteoArea_Result.cs">
@@ -510,9 +517,18 @@
     <Content Include="Views\Carrie\LogIn.cshtml" />
     <Content Include="Views\Carrie\Main.cshtml" />
     <Content Include="Views\Carrie\Foward.cshtml" />
+    <Content Include="Views\Carrie\ResultsEA.cshtml" />
+    <Content Include="Views\Carrie\Back.cshtml" />
+    <Content Include="Views\preguntas_en_at\Create.cshtml" />
+    <Content Include="Views\preguntas_en_at\Delete.cshtml" />
+    <Content Include="Views\preguntas_en_at\Details.cshtml" />
+    <Content Include="Views\preguntas_en_at\Edit.cshtml" />
+    <Content Include="Views\preguntas_en_at\Index.cshtml" />
+    <Content Include="Views\Carrie\ResultsEB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Encadenamientos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

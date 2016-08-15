@@ -24,6 +24,7 @@ namespace CarrierIntegrator
     
         public int id_pregunta { get; set; }
         public string pregunta { get; set; }
+        public Nullable<int> id_carrera { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pregunta_area> pregunta_area { get; set; }
@@ -31,5 +32,6 @@ namespace CarrierIntegrator
         public virtual ICollection<preguntas_en_ad> preguntas_en_ad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<preguntas_en_at> preguntas_en_at { get; set; }
+        public virtual Carreras Carreras { get; set; }
     }
 }

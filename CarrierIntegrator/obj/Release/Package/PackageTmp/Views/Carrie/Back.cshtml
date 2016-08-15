@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Titulo = "Se que estudiar";
+    Layout = "~/Views/Shared/_Landing.cshtml";
+}
+
+@section preguntas{
+<input id="usersession" type="text" value="@ViewBag.session" hidden />
+<input id="carrera" type="text" value="@ViewBag.carrera" hidden />
+<input id="cantidadp" type="text" value="@ViewBag.cantidad_preguntas" hidden />
+
+<!--APP BODY-->
+
+<div class="container">
+    <div id="pregunta-content" class="well text-center">
+
+        <h4></h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"><button  id="b-si" class="btn btn-success col-md-12" onclick="siguientePregunta('SI')">Si</button></div>
+        <div class="col-md-4"><button  id="b-nose" class="btn btn-warning col-md-12" onclick="siguientePregunta('NO SE')">No Se</button></div>
+        <div class="col-md-4"><button id="b-no" class="btn btn-danger col-md-12" onclick="siguientePregunta('NO')">No</button></div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    var contador = 0;
+
+    console.log(usersession);
+    console.log(carrera);
+    console.log(cantidadp);
+
+   /* $(document).ready(function () {
+        primeraPregunta();
+    });*/
+
+
+     function firsPreguntas()
+    {
+         var area = $("#carrera").val();
+
+          $.ajax({
+
+            type: "GET",
+            dataType: 'json',
+            url: '/Encadenamientos/PreguntasByArea/' + area,
+            async: true,
+            success: function (response) {
+               //alert("Exito");
+                $("#pregunta-content").append("<h4>" + (contador+1) + ".- " + response[contador].pregunta + "?</h4>");
+                return false;
+            },
+            error: function (obj, error, objError) {
+                //alert("Error interno: " + objError);
+
+            }
+        });
+
+    }
+
+		 function siguientePregunta(respuesta)
+     {
+		     if ((contador+1) == $("#cantidadp").val()) {
+		         window.location.replace("/Carrie/ResultsEB/");
+		     }
+
+		     var usersession = $("#usersession").val();
+		     var area = $("#carrera").val();
+
+		     respuestaPregunta(contador, respuesta, usersession);
+
+		     $("#pregunta-content h4").remove();
+
+
+                $.ajax({
+
+            type: "GET",
+            dataType: 'json',
+            url: '/Encadenamientos/PreguntasByArea/' + area,
+            async: true,
+            success: function (response) {
+               //alert("Exito");
+                $("#pregunta-content").append("<h4>" + (contador+1) + ".- " + response[contador].pregunta + "?</h4>");
+                console.log(response);
+            },
+            error: function (obj, error, objError) {
+               // alert("Error interno: " + objError);
+
+            }
+        });
+
+                contador++;
+    }
+
+    function respuestaPregunta(pregunta, respuesta, sesion)
+    {
+
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: 'http://carrierintegrator.azurewebsites.net/api/ApiPreguntas/'+pregunta+'/'+respuesta+'/'+sesion,
+            async: true,
+            success: function (response) {
+
+            },
+            error: function (obj, error, objError) {
+                //alert("Error interno: " + objError);
+
+            }
+        });
+    }
+
+
+</script>
+    
+}
+

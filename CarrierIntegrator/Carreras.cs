@@ -14,11 +14,19 @@ namespace CarrierIntegrator
     
     public partial class Carreras
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Carreras()
+        {
+            this.Preguntas = new HashSet<Preguntas>();
+        }
+    
         public int id_carrera { get; set; }
         public Nullable<int> fk_area { get; set; }
         public string nombre_carrera { get; set; }
         public string descripcion_carrera { get; set; }
     
         public virtual areas_car areas_car { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Preguntas> Preguntas { get; set; }
     }
 }

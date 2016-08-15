@@ -1,0 +1,33 @@
+﻿@model List<spBack_Tracking_Result>
+@{
+    ViewBag.Title = "ResultsEB";
+    Layout = "~/Views/Shared/_Landing.cshtml";
+}
+
+@section preguntas{
+    
+    @if(ViewBag.aptitud != null)
+    {
+        if (ViewBag.aptitud == true)
+        {
+            <h3>Felicidaes eres apto para la carrera de @ViewBag.retroalimentacion</h3>
+        }
+        else
+        {
+            <h3>Lo sentimos no cumples con el perfil requierido para la carrera</h3>
+        }
+    }
+    
+    <h2>Tus resultados</h2>
+
+    <ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">@item.idCarrera  <span class="label label-info">@item.Porcentaje</span></li>
+               
+    }
+    </ul>
+
+
+ }
+

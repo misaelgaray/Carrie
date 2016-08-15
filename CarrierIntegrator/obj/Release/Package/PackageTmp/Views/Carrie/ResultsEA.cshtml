@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Carreras>
+@{
+    ViewBag.Titulo = "Tus Resultados";
+    Layout = "~/Views/Shared/_Landing.cshtml";
+}
+
+
+
+@section preguntas{
+    <h3>Eres apto para las siguientes carreras</h3>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item"><span class="label label-info">@item.nombre_carrera</span>     @item.descripcion_carrera</li>
+        }
+    </ul>
+}
+
+
+
